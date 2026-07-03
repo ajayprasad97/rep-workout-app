@@ -9,6 +9,9 @@
   <meta property="og:description" content="Train smarter. Progress faster. Rep adapts to your goals, equipment, and schedule." />
   <meta property="og:type" content="website" />
 
+  <!-- Marks JS as available so CSS can pre-hide reveal elements without breaking no-JS visitors -->
+  <script>document.documentElement.classList.add('js');</script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700&display=swap" rel="stylesheet" />
@@ -37,6 +40,16 @@
 
     html { scroll-behavior: smooth; }
 
+    section[id] { scroll-margin-top: 72px; }
+
+    /* Reveal elements start hidden only when JS is available; GSAP fades them in */
+    html.js .reveal-up { visibility: hidden; }
+
+    /* Cross-page transitions (progressive enhancement — ignored by older browsers) */
+    @view-transition { navigation: auto; }
+    ::view-transition-old(root),
+    ::view-transition-new(root) { animation-duration: 0.28s; }
+
     body {
       background: var(--bg);
       color: var(--text);
@@ -48,6 +61,13 @@
 
     /* ── Gradient text ── */
     .gradient-text {
+      background: linear-gradient(135deg, #3E2819 0%, #8C3D1F 45%, #B8603C 75%, #A06827 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    /* SplitText line wrappers get their own gradient so the clip survives per-line transforms */
+    .hero-line {
       background: linear-gradient(135deg, #3E2819 0%, #8C3D1F 45%, #B8603C 75%, #A06827 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -68,17 +88,22 @@
       text-decoration: none;
       cursor: pointer;
       border: none;
-      transition: opacity 0.2s, transform 0.15s;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease, background 0.2s ease;
       white-space: nowrap;
     }
-    .btn:hover { opacity: 0.85; transform: translateY(-1px); }
+    .btn:hover { transform: translateY(-2px); }
+    .btn:active { transform: translateY(0) scale(0.97); }
     .btn-primary { background: var(--accent); color: var(--accent-fg); }
+    .btn-primary:hover {
+      filter: brightness(1.07);
+      box-shadow: 0 8px 20px rgba(184,96,60,0.32);
+    }
     .btn-outline {
       background: transparent;
       color: var(--text);
       border: 1.5px solid var(--border);
     }
-    .btn-outline:hover { background: var(--surface-muted); opacity: 1; }
+    .btn-outline:hover { background: var(--surface-muted); box-shadow: 0 6px 16px rgba(62,40,25,0.1); }
     .btn-lg { padding: 13px 26px; font-size: 0.97rem; border-radius: 10px; }
     .btn-pill { border-radius: 50px; }
 
@@ -93,6 +118,7 @@
       padding: 0 5%;
       gap: 1rem;
       transition: background 0.3s, box-shadow 0.3s;
+      view-transition-name: site-header;
     }
     header.scrolled {
       background: rgba(247,238,220,0.94);
@@ -121,8 +147,6 @@
       flex: 1;
       align-items: center;
       gap: 1rem;
-      overflow: hidden;
-      transition: width 0.3s ease, opacity 0.3s ease;
     }
 
     nav {
@@ -227,6 +251,16 @@
       pointer-events: none;
       z-index: 0;
     }
+    /* Cream veil: keeps the headline readable over the shader and blends the
+       hero bottom into the strip section below */
+    #hero-gradient-mount::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 95% 62% at 50% 32%, rgba(247,238,220,0.94) 0%, rgba(247,238,220,0.6) 55%, rgba(247,238,220,0.15) 100%),
+        linear-gradient(180deg, rgba(247,238,220,0.35) 0%, rgba(247,238,220,0.1) 45%, rgba(247,238,220,0.75) 100%);
+    }
     #hero > *:not(#hero-gradient-mount) {
       position: relative;
       z-index: 1;
@@ -288,7 +322,10 @@
       height: 52px;
       display: flex;
       align-items: center;
+      -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+      mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
     }
+    #strip:hover .strip-track { animation-play-state: paused; }
     .strip-track {
       display: flex;
       gap: 0;
@@ -358,6 +395,11 @@
       align-items: center; justify-content: center;
       font-size: 1.45rem;
       color: var(--accent);
+      transition: transform 0.25s ease, background 0.25s ease;
+    }
+    .feat-item:hover .feat-icon {
+      transform: scale(1.07) rotate(-4deg);
+      background: rgba(184,96,60,0.22);
     }
     .feat-text h3 {
       font-size: 1.15rem;
@@ -405,15 +447,17 @@
       transition: box-shadow 0.25s, transform 0.25s;
     }
     .feat-card:hover {
-      box-shadow: 0 6px 24px rgba(62,40,25,0.09);
-      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(62,40,25,0.11);
+      transform: translateY(-4px);
     }
     .card-icon-wrap {
       font-size: 1.45rem;
       color: var(--accent);
       min-width: 1.45rem;
       margin-top: 2px;
+      transition: transform 0.25s ease;
     }
+    .feat-card:hover .card-icon-wrap { transform: scale(1.12); }
     .card-body h3 {
       font-size: 0.97rem;
       font-weight: 600;
@@ -510,19 +554,33 @@
         position: fixed;
         right: 0; top: 0;
         flex-direction: column;
-        width: 0;
+        width: min(320px, 78vw);
         height: 100vh;
         height: 100dvh;
         background: var(--surface);
         border-left: 1px solid var(--border);
         padding: 5rem 1.5rem 2rem;
-        opacity: 0;
         overflow-y: auto;
         align-items: flex-end;
         justify-content: flex-start;
         z-index: 99;
+        transform: translateX(100%);
+        visibility: hidden;
+        transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), visibility 0s 0.35s;
       }
-      .collapsible-header.open { width: 68vw; opacity: 1; }
+      .collapsible-header.open {
+        transform: translateX(0);
+        visibility: visible;
+        transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+      .collapsible-header > * {
+        opacity: 0;
+        transform: translateX(16px);
+        transition: opacity 0.25s ease, transform 0.25s ease;
+      }
+      .collapsible-header.open > * { opacity: 1; transform: none; }
+      .collapsible-header.open nav { transition-delay: 0.08s; }
+      .collapsible-header.open .header-actions { transition-delay: 0.16s; }
       nav { flex-direction: column; align-items: flex-end; gap: 0.15rem; margin: 0; width: 100%; }
       .nav-link { font-size: 1.05rem; width: 100%; text-align: right; }
       .header-actions { flex-direction: column; width: 100%; align-items: flex-end; }
@@ -540,6 +598,19 @@
       #features, #cards, #cta { padding-left: 5%; padding-right: 5%; }
       .phone-frame { width: 220px; }
       footer { grid-template-columns: 1fr; padding: 2.5rem 5%; }
+    }
+
+    /* ── Reduced motion ── */
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      html.js .reveal-up { visibility: visible; }
+      .strip-track { animation: none; }
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      @view-transition { navigation: none; }
     }
   </style>
 </head>
@@ -602,7 +673,7 @@
   <div class="hero-phone-wrap reveal-up">
     <div class="hero-glow"></div>
     <div class="phone-frame" id="hero-phone">
-      <img src="assets/social.png" alt="Rep social feed" class="phone-screenshot">
+      <img src="assets/social.png" alt="Rep social feed" class="phone-screenshot" fetchpriority="high" decoding="async">
     </div>
   </div>
 </section>
@@ -677,7 +748,7 @@
     <div class="features-phone-col">
       <div class="features-phone-sticky">
         <div class="phone-frame" style="width:240px;">
-          <img src="assets/workout.png" alt="Rep workout screen" class="phone-screenshot">
+          <img src="assets/workout.png" alt="Rep workout screen" class="phone-screenshot" loading="lazy" decoding="async">
         </div>
       </div>
     </div>
@@ -769,7 +840,7 @@
 
     <div class="cta-phone-col reveal-up">
       <div class="phone-frame" style="width:230px;">
-        <img src="assets/share.png" alt="Rep workout summary" class="phone-screenshot">
+        <img src="assets/share.png" alt="Rep workout summary" class="phone-screenshot" loading="lazy" decoding="async">
       </div>
     </div>
   </div>
@@ -809,8 +880,9 @@
 
 
 <!-- GSAP -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.0/gsap.min.js" integrity="sha512-B1lby8cGcAUU3GR+Fd809/ZxgHbfwJMp0jLTVfHiArTuUt++VqSlJpaJvhNtRf3NERaxDNmmxkdx2o+aHd4bvw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.0/ScrollTrigger.min.js" integrity="sha512-AY2+JxnBETJ0wcXnLPCcZJIJx0eimyhz3OJ55k2Jx4RtYC+XdIi2VtJQ+tP3BaTst4otlGG1TtPJ9fKrAUnRdQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js" integrity="sha512-NcZdtrT77bJr4STcmsGAESr06BYGE8woZdSdEgqnpyqac7sugNO+Tr4bGwGF3MsnEkGKhU2KL2xh6Ec+BqsaHA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js" integrity="sha512-P2IDYZfqSwjcSjX0BKeNhwRUH8zRPGlgcWl5n6gBLzdi4Y5/0O4zaXrtO4K9TZK6Hn1BenYpKowuCavNandERg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/SplitText.min.js" integrity="sha512-wOeEC+9qERAzhliwBFPDb6t8TiFFxdxG8vhK/Ygs7TuC44bpg8pg/X2/U/u+0X4fK05wb9id1EIipnF02+CFQw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <script>
   // ── Header scroll ──
@@ -847,66 +919,100 @@
   });
 
   // ── GSAP ──
-  gsap.registerPlugin(ScrollTrigger);
+  if (!window.gsap || !window.ScrollTrigger) {
+    // CDN failed — undo the pre-hide so content stays visible
+    document.documentElement.classList.remove('js');
+  } else {
+    gsap.registerPlugin(ScrollTrigger);
+    if (window.SplitText) gsap.registerPlugin(SplitText);
 
-  // Hero: animate in immediately on load (not scroll-triggered)
-  const heroItems = document.querySelectorAll('#hero .reveal-up');
-  gsap.set(heroItems, { opacity: 0, y: 28 });
-  gsap.to(heroItems, {
-    opacity: 1, y: 0,
-    duration: 0.75,
-    stagger: 0.12,
-    ease: 'power2.out',
-    delay: 0.1,
-  });
+    const mm = gsap.matchMedia();
+    mm.add('(prefers-reduced-motion: no-preference)', () => {
 
-  // Hero phone: start tilted, straighten on scroll
-  gsap.set('#hero-phone', {
-    rotateX: '20deg',
-    scale: 0.88,
-    transformOrigin: 'bottom center',
-    transformPerspective: 1200,
-  });
-  gsap.to('#hero-phone', {
-    rotateX: '0deg',
-    scale: 1,
-    scrollTrigger: {
-      trigger: '#hero',
-      start: 'top top',
-      end: 'bottom bottom',
-      scrub: 1.2,
-    }
-  });
+      // Hero: animate in on load (not scroll-triggered)
+      const heroTitle = document.querySelector('.hero-title');
+      const heroIntro = () => {
+        const tl = gsap.timeline({ defaults: { ease: 'power3.out' }, delay: 0.1 });
+        gsap.set(['.hero-eyebrow', '.hero-sub', '.hero-ctas', '.hero-phone-wrap'], { y: 26 });
 
-  // All other sections: hide reveal-up items and animate in on scroll
-  const belowHeroSections = Array.from(document.querySelectorAll('section')).filter(s => s.id !== 'hero');
-  belowHeroSections.forEach(sec => {
-    const items = sec.querySelectorAll('.reveal-up');
-    if (!items.length) return;
-    gsap.set(items, { opacity: 0, y: 32 });
-    gsap.timeline({
-      scrollTrigger: {
-        trigger: sec,
-        start: '6% 88%',
-        end: '18% 92%',
+        tl.to('.hero-eyebrow', { autoAlpha: 1, y: 0, duration: 0.6 });
+
+        if (window.SplitText) {
+          const split = SplitText.create(heroTitle, { type: 'lines', mask: 'lines', linesClass: 'hero-line' });
+          heroTitle.classList.remove('gradient-text'); // each line carries its own gradient
+          gsap.set(heroTitle, { autoAlpha: 1 });
+          tl.from(split.lines, { yPercent: 115, duration: 0.95, ease: 'power4.out', stagger: 0.14 }, '-=0.35');
+        } else {
+          gsap.set(heroTitle, { y: 28 });
+          tl.to(heroTitle, { autoAlpha: 1, y: 0, duration: 0.75 }, '-=0.35');
+        }
+
+        tl.to(['.hero-sub', '.hero-ctas', '.hero-phone-wrap'], {
+          autoAlpha: 1, y: 0, duration: 0.7, stagger: 0.11,
+        }, '-=0.55');
+      };
+      // Split lines only after the webfont is in, so line boxes measure correctly
+      if (document.fonts && document.fonts.status !== 'loaded') {
+        document.fonts.ready.then(heroIntro);
+      } else {
+        heroIntro();
       }
-    }).to(items, {
-      opacity: 1, y: 0,
-      duration: 0.65,
-      stagger: 0.1,
-      ease: 'power2.out',
+
+      // Hero phone: start tilted, straighten on scroll
+      gsap.set('#hero-phone', {
+        rotateX: '20deg',
+        scale: 0.88,
+        transformOrigin: 'bottom center',
+        transformPerspective: 1200,
+      });
+      gsap.to('#hero-phone', {
+        rotateX: '0deg',
+        scale: 1,
+        scrollTrigger: {
+          trigger: '#hero',
+          start: 'top top',
+          end: 'bottom 55%',
+          scrub: 1.2,
+        }
+      });
+
+      // Hero phone: subtle mouse parallax (mouse pointers only)
+      if (window.matchMedia('(pointer: fine)').matches) {
+        const xTo = gsap.quickTo('#hero-phone', 'x', { duration: 0.7, ease: 'power3' });
+        const yTo = gsap.quickTo('#hero-phone', 'y', { duration: 0.7, ease: 'power3' });
+        window.addEventListener('mousemove', (e) => {
+          xTo((e.clientX / window.innerWidth - 0.5) * 14);
+          yTo((e.clientY / window.innerHeight - 0.5) * 10);
+        }, { passive: true });
+      }
+
+      // Below the hero: reveal each element as it actually enters the viewport
+      const belowHero = gsap.utils.toArray('section:not(#hero) .reveal-up');
+      gsap.set(belowHero, { y: 32 });
+      ScrollTrigger.batch(belowHero, {
+        start: 'top 88%',
+        once: true,
+        onEnter: (batch) => gsap.to(batch, {
+          autoAlpha: 1, y: 0,
+          duration: 0.7,
+          stagger: 0.1,
+          ease: 'power3.out',
+        }),
+      });
     });
-  });
+  }
 </script>
 
 
+<!-- React 19 required: @shadergradient/react resolves @react-three/fiber v9, which needs React 19.
+     Versions pinned so esm.sh dependency drift can't silently break the hero again. -->
 <script type="importmap">
 {
   "imports": {
-    "react":            "https://esm.sh/react@18.3.1",
-    "react/jsx-runtime":"https://esm.sh/react@18.3.1/jsx-runtime",
-    "react-dom":        "https://esm.sh/react-dom@18.3.1",
-    "react-dom/client": "https://esm.sh/react-dom@18.3.1/client",
+    "react":            "https://esm.sh/react@19.2.0",
+    "react/jsx-runtime":"https://esm.sh/react@19.2.0/jsx-runtime",
+    "react-dom":        "https://esm.sh/react-dom@19.2.0",
+    "react-dom/client": "https://esm.sh/react-dom@19.2.0/client",
     "three":            "https://esm.sh/three@0.163.0"
   }
 }
@@ -915,10 +1021,13 @@
 <script type="module">
   import React from 'react';
   import { createRoot } from 'react-dom/client';
-  import { ShaderGradient, ShaderGradientCanvas } from 'https://esm.sh/@shadergradient/react?external=react,react-dom,three';
+  import { ShaderGradient, ShaderGradientCanvas } from 'https://esm.sh/@shadergradient/react@2.4.20?external=react,react-dom,three';
 
   const mount = document.getElementById('hero-gradient-mount');
-  if (mount) {
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (mount && !prefersReducedMotion) {
+    mount.style.opacity = '0';
+    mount.style.transition = 'opacity 1.4s ease';
     const root = createRoot(mount);
     root.render(
       React.createElement(
@@ -967,6 +1076,8 @@
         })
       )
     );
+    // Fade the canvas in once the WebGL context has had a moment to paint
+    setTimeout(() => { mount.style.opacity = '1'; }, 400);
   }
 </script>
 

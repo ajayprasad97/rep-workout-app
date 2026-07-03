@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Top Exercises & Workout Templates | Rep — The Workout App</title>
+  <meta name="description" content="Discover the 10 most popular exercises tracked in Rep — from Barbell Bench Press to Leg Press — plus curated workout templates to import directly into the app." />
+  <meta property="og:title" content="Top Exercises & Workout Templates | Rep" />
+  <meta property="og:description" content="The most popular lifts tracked in Rep, with curated workout templates ready to import." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://repworkout.app/top.html" />
+  <link rel="canonical" href="https://repworkout.app/top.html" />
+
+  <!-- Marks JS as available so CSS can pre-hide reveal elements without breaking no-JS visitors -->
+  <script>document.documentElement.classList.add('js');</script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" integrity="sha512-dPXYcDub/aeb08c63jRq/k6GaKccl256JQy/AnOq7CAnEZ9FzSL9wSbcZkMp4R26vBsMLFYH4kQ67/bbV8XaCQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:            #F7EEDC;
+      --surface:       #FCF6E9;
+      --surface-alt:   #EDDFC4;
+      --surface-muted: #F1E5CB;
+      --text:          #3E2819;
+      --text-sub:      #735440;
+      --text-muted:    #A38872;
+      --border:        #DFD0B4;
+      --divider:       rgba(62,40,25,0.09);
+      --accent:        #B8603C;
+      --accent-fg:     #FFFFFF;
+      --accent-muted:  rgba(184,96,60,0.14);
+      --accent-border: rgba(184,96,60,0.35);
+      --accent-text:   #934A2C;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    section[id] { scroll-margin-top: 72px; }
+
+    /* Reveal elements start hidden only when JS is available; GSAP fades them in */
+    html.js .exercise-card,
+    html.js .template-card,
+    html.js .section-header { visibility: hidden; }
+
+    /* Cross-page transitions (progressive enhancement — ignored by older browsers) */
+    @view-transition { navigation: auto; }
+    ::view-transition-old(root),
+    ::view-transition-new(root) { animation-duration: 0.28s; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, #3E2819 0%, #8C3D1F 45%, #B8603C 75%, #A06827 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ── Buttons ── */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      gap: 0.45rem; padding: 10px 20px; border-radius: 8px;
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 0.9rem; font-weight: 600; text-decoration: none;
+      cursor: pointer; border: none;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease, background 0.2s ease;
+      white-space: nowrap;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn:active { transform: translateY(0) scale(0.97); }
+    .btn-primary { background: var(--accent); color: var(--accent-fg); }
+    .btn-primary:hover {
+      filter: brightness(1.07);
+      box-shadow: 0 8px 20px rgba(184,96,60,0.32);
+    }
+    .btn-outline {
+      background: transparent; color: var(--text);
+      border: 1.5px solid var(--border);
+    }
+    .btn-outline:hover { background: var(--surface-muted); box-shadow: 0 6px 16px rgba(62,40,25,0.1); }
+    .btn-lg { padding: 13px 26px; font-size: 0.97rem; border-radius: 10px; }
+    .btn-pill { border-radius: 50px; }
+
+    /* ── Header ── */
+    header {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      height: 64px; display: flex; align-items: center;
+      padding: 0 5%; gap: 1rem;
+      transition: background 0.3s, box-shadow 0.3s;
+      view-transition-name: site-header;
+    }
+    header.scrolled {
+      background: rgba(247,238,220,0.94);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      box-shadow: 0 1px 0 var(--border);
+    }
+    .header-logo {
+      display: flex; align-items: center; gap: 0.5rem;
+      text-decoration: none; flex-shrink: 0;
+    }
+    .logo-img { width: 34px; height: 34px; border-radius: 8px; display: block; flex-shrink: 0; }
+    .logo-name { font-size: 1rem; font-weight: 600; color: var(--text); }
+
+    .collapsible-header {
+      display: flex; flex: 1; align-items: center; gap: 1rem;
+    }
+    nav { display: flex; gap: 0.15rem; margin: 0 auto; align-items: center; }
+    .nav-link {
+      padding: 6px 13px; border-radius: 6px;
+      font-size: 0.88rem; font-weight: 500;
+      color: var(--text-sub); text-decoration: none;
+      transition: color 0.2s, background 0.2s; white-space: nowrap;
+    }
+    .nav-link:hover, .nav-link.active { color: var(--text); background: var(--surface-muted); }
+    .header-actions { display: flex; align-items: center; gap: 0.75rem; flex-shrink: 0; }
+
+    #menu-btn {
+      display: none; position: absolute; right: 1.1rem; top: 50%;
+      transform: translateY(-50%); background: none; border: none;
+      cursor: pointer; font-size: 1.6rem; color: var(--text); z-index: 110; line-height: 1;
+    }
+
+    /* ── Page hero ── */
+    #page-hero {
+      padding: 120px 8% 72px;
+      text-align: center;
+    }
+    @media (prefers-reduced-motion: no-preference) {
+      #page-hero > * { animation: rise-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) backwards; }
+      #page-hero > *:nth-child(2) { animation-delay: 0.1s; }
+      #page-hero > *:nth-child(3) { animation-delay: 0.2s; }
+    }
+    @keyframes rise-in {
+      from { opacity: 0; transform: translateY(20px); }
+    }
+    .page-eyebrow {
+      display: inline-block;
+      background: var(--accent-muted); border: 1px solid var(--accent-border);
+      color: var(--accent-text); padding: 5px 16px; border-radius: 20px;
+      font-size: 0.8rem; font-weight: 500; margin-bottom: 1.25rem;
+    }
+    .page-title {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 700; line-height: 1.1; letter-spacing: -0.03em;
+      margin-bottom: 1rem;
+    }
+    .page-sub {
+      font-size: clamp(0.92rem, 2vw, 1.05rem);
+      color: var(--text-sub); max-width: 520px; margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    /* ── Section layout ── */
+    .content-section {
+      padding: 72px 8%;
+    }
+    .content-section + .content-section {
+      border-top: 1px solid var(--border);
+    }
+    .section-header { margin-bottom: 2.5rem; }
+    .section-eyebrow {
+      font-size: 0.7rem; font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--accent-text); margin-bottom: 0.45rem;
+    }
+    .section-title {
+      font-size: clamp(1.5rem, 3.5vw, 2.25rem);
+      font-weight: 700; letter-spacing: -0.025em; color: var(--text);
+      line-height: 1.15;
+    }
+    .section-sub {
+      margin-top: 0.5rem;
+      font-size: 0.9rem; color: var(--text-sub); line-height: 1.65;
+      max-width: 580px;
+    }
+
+    /* ── Exercise cards ── */
+    .exercise-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+    .exercise-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+      transition: box-shadow 0.25s, transform 0.25s;
+    }
+    .exercise-card:hover {
+      box-shadow: 0 8px 28px rgba(62,40,25,0.1);
+      transform: translateY(-2px);
+    }
+    .ex-card-top {
+      display: flex; align-items: flex-start; gap: 1rem;
+    }
+    .ex-icon {
+      width: 48px; height: 48px; min-width: 48px;
+      background: var(--accent-muted);
+      border: 1px solid var(--accent-border);
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.35rem; color: var(--accent);
+      transition: transform 0.25s ease, background 0.25s ease;
+    }
+    .exercise-card:hover .ex-icon {
+      transform: scale(1.07) rotate(-4deg);
+      background: rgba(184,96,60,0.22);
+    }
+    .ex-meta { flex: 1; min-width: 0; }
+    .ex-rank {
+      font-size: 0.7rem; font-weight: 600; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.2rem;
+    }
+    .ex-name {
+      font-size: 1.05rem; font-weight: 700; color: var(--text);
+      letter-spacing: -0.01em; line-height: 1.25;
+    }
+    .ex-desc {
+      font-size: 0.84rem; color: var(--text-sub); line-height: 1.65;
+    }
+    .ex-tags {
+      display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.25rem;
+    }
+    .tag {
+      display: inline-flex; align-items: center; gap: 0.3rem;
+      padding: 3px 10px; border-radius: 20px;
+      font-size: 0.73rem; font-weight: 500; white-space: nowrap;
+    }
+    .tag-muscle {
+      background: var(--accent-muted); color: var(--accent-text);
+      border: 1px solid var(--accent-border);
+    }
+    .tag-equipment {
+      background: var(--surface-alt); color: var(--text-sub);
+      border: 1px solid var(--border);
+    }
+    .tag-level {
+      background: var(--surface-muted); color: var(--text-muted);
+      border: 1px solid var(--border);
+    }
+
+    /* ── Template cards ── */
+    .template-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+    .template-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.5rem;
+      display: flex; flex-direction: column; gap: 0.75rem;
+      position: relative;
+      transition: box-shadow 0.25s, transform 0.25s;
+    }
+    .template-card.coming-soon {
+      opacity: 0.72;
+      pointer-events: none;
+    }
+    .template-card:not(.coming-soon):hover {
+      box-shadow: 0 8px 28px rgba(62,40,25,0.1);
+      transform: translateY(-2px);
+    }
+    .tpl-badge {
+      position: absolute; top: 1rem; right: 1rem;
+      background: var(--surface-muted); color: var(--text-muted);
+      border: 1px solid var(--border);
+      padding: 2px 10px; border-radius: 20px;
+      font-size: 0.68rem; font-weight: 600; letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .tpl-icon {
+      width: 44px; height: 44px;
+      background: var(--accent-muted); border: 1px solid var(--accent-border);
+      border-radius: 11px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem; color: var(--accent);
+    }
+    .tpl-split {
+      font-size: 0.7rem; font-weight: 600; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--text-muted);
+    }
+    .tpl-name {
+      font-size: 1rem; font-weight: 700; color: var(--text); letter-spacing: -0.01em;
+      line-height: 1.25; padding-right: 3.5rem;
+    }
+    .tpl-desc {
+      font-size: 0.82rem; color: var(--text-sub); line-height: 1.6;
+    }
+    .tpl-muscles {
+      display: flex; flex-wrap: wrap; gap: 0.35rem;
+    }
+    .tpl-import-btn {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      margin-top: 0.25rem; padding: 8px 16px; border-radius: 8px;
+      background: var(--accent); color: var(--accent-fg);
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 0.82rem; font-weight: 600; text-decoration: none;
+      width: fit-content;
+      transition: opacity 0.2s, transform 0.15s;
+    }
+    .tpl-import-btn:hover { opacity: 0.85; transform: translateY(-1px); }
+
+    /* ── CTA ── */
+    #cta {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      padding: 80px 8%;
+      text-align: center;
+    }
+    #cta h2 {
+      font-size: clamp(1.65rem, 4vw, 2.5rem);
+      font-weight: 700; letter-spacing: -0.025em;
+      color: var(--text); line-height: 1.15; margin-bottom: 0.75rem;
+    }
+    #cta p {
+      font-size: 0.95rem; color: var(--text-sub);
+      margin-bottom: 2rem; max-width: 420px; margin-left: auto; margin-right: auto;
+      line-height: 1.65;
+    }
+    .cta-btns { display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; }
+
+    /* ── Footer ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 3rem 8%;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+    .footer-brand { min-width: 0; }
+    .footer-brand-logo { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem; }
+    .footer-tagline { font-size: 0.82rem; color: var(--text-muted); line-height: 1.5; }
+    .footer-col h4 {
+      font-size: 0.72rem; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.09em; color: var(--text-muted); margin-bottom: 0.75rem;
+    }
+    .footer-col a {
+      display: block; font-size: 0.87rem; color: var(--text-sub);
+      text-decoration: none; margin-bottom: 0.45rem; transition: color 0.2s;
+    }
+    .footer-col a:hover { color: var(--text); }
+    .footer-bottom {
+      width: 100%; padding-top: 1.5rem;
+      border-top: 1px solid var(--divider);
+      font-size: 0.78rem; color: var(--text-muted);
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 1024px) {
+      #menu-btn { display: block; }
+      .collapsible-header {
+        position: fixed; right: 0; top: 0;
+        flex-direction: column; width: min(320px, 78vw); height: 100vh; height: 100dvh;
+        background: var(--surface); border-left: 1px solid var(--border);
+        padding: 5rem 1.5rem 2rem; overflow-y: auto;
+        align-items: flex-end; justify-content: flex-start; z-index: 99;
+        transform: translateX(100%);
+        visibility: hidden;
+        transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), visibility 0s 0.35s;
+      }
+      .collapsible-header.open {
+        transform: translateX(0);
+        visibility: visible;
+        transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+      .collapsible-header > * {
+        opacity: 0;
+        transform: translateX(16px);
+        transition: opacity 0.25s ease, transform 0.25s ease;
+      }
+      .collapsible-header.open > * { opacity: 1; transform: none; }
+      .collapsible-header.open nav { transition-delay: 0.08s; }
+      .collapsible-header.open .header-actions { transition-delay: 0.16s; }
+      nav { flex-direction: column; align-items: flex-end; gap: 0.15rem; margin: 0; width: 100%; }
+      .nav-link { font-size: 1.05rem; width: 100%; text-align: right; }
+      .header-actions { flex-direction: column; width: 100%; align-items: flex-end; }
+      .template-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 720px) {
+      .exercise-grid { grid-template-columns: 1fr; }
+      .template-grid { grid-template-columns: 1fr; }
+      #page-hero { padding: 100px 5% 56px; }
+      .content-section { padding-left: 5%; padding-right: 5%; }
+      footer { grid-template-columns: 1fr; padding: 2.5rem 5%; }
+    }
+
+    /* ── Reduced motion ── */
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      html.js .exercise-card,
+      html.js .template-card,
+      html.js .section-header { visibility: visible; }
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      @view-transition { navigation: none; }
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "Top 10 Exercises in Rep",
+    "description": "The most popular exercises tracked by Rep users, from strength staples to cardio essentials.",
+    "url": "https://repworkout.app/top.html",
+    "itemListElement": [
+      {
+        "@type": "ListItem", "position": 1,
+        "item": { "@type": "HowTo", "name": "Seated Calf Raise", "description": "A machine-based isolation exercise that targets the soleus and gastrocnemius by raising the heels through a full range of motion while seated." }
+      },
+      {
+        "@type": "ListItem", "position": 2,
+        "item": { "@type": "HowTo", "name": "Walking - Treadmill", "description": "Low-impact steady-state cardio performed on a treadmill, targeting the quadriceps, hamstrings, and calves." }
+      },
+      {
+        "@type": "ListItem", "position": 3,
+        "item": { "@type": "HowTo", "name": "Dumbbell Bicep Curl", "description": "A classic dumbbell isolation movement that targets the biceps brachii through a controlled curl from hip to shoulder height." }
+      },
+      {
+        "@type": "ListItem", "position": 4,
+        "item": { "@type": "HowTo", "name": "EZ-Bar Skullcrusher", "description": "A lying triceps extension performed with an EZ curl bar, lowering the bar toward the forehead to isolate the triceps." }
+      },
+      {
+        "@type": "ListItem", "position": 5,
+        "item": { "@type": "HowTo", "name": "Leg Press", "description": "A machine compound movement that targets the quadriceps, hamstrings, and glutes by pressing a weighted sled away from the body." }
+      },
+      {
+        "@type": "ListItem", "position": 6,
+        "item": { "@type": "HowTo", "name": "Seated Cable Rows", "description": "A seated cable pulling exercise that builds mid-back thickness and biceps by rowing a handle toward the lower torso." }
+      },
+      {
+        "@type": "ListItem", "position": 7,
+        "item": { "@type": "HowTo", "name": "Barbell Bench Press", "description": "The foundational horizontal push movement, training the chest, shoulders, and triceps by pressing a loaded barbell from chest to lockout." }
+      },
+      {
+        "@type": "ListItem", "position": 8,
+        "item": { "@type": "HowTo", "name": "Dumbbell Shoulder Press", "description": "An overhead pressing movement with dumbbells that builds shoulder width and pressing strength through a natural arc of motion." }
+      },
+      {
+        "@type": "ListItem", "position": 9,
+        "item": { "@type": "HowTo", "name": "Hammer Curls", "description": "A neutral-grip dumbbell curl that targets both the biceps and brachialis for fuller, thicker arms." }
+      },
+      {
+        "@type": "ListItem", "position": 10,
+        "item": { "@type": "HowTo", "name": "Leg Extensions", "description": "A machine isolation exercise that targets the quadriceps by extending the legs to full lockout from a seated position." }
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+
+<!-- ═══════════════════════════════════ HEADER ═══ -->
+<header id="site-header">
+  <a href="." class="header-logo">
+    <img class="logo-img" src="assets/icon.png" alt="Rep logo" />
+    <span class="logo-name">Rep</span>
+  </a>
+
+  <div class="collapsible-header" id="nav-collapse">
+    <nav>
+      <a class="nav-link" href="index.html#features">Features</a>
+      <a class="nav-link active" href="top.html">Top Exercises</a>
+      <a class="nav-link" href="faq.html">FAQ</a>
+      <a class="nav-link" href="privacy.html">Privacy</a>
+    </nav>
+    <div class="header-actions">
+      <a class="btn btn-primary btn-pill" href="https://apps.apple.com/us/app/rep-the-workout-app/id6765540272" target="_blank" rel="noopener noreferrer">
+        <i class="bi bi-apple"></i> Download
+      </a>
+    </div>
+  </div>
+
+  <button id="menu-btn" onclick="toggleNav()" aria-label="Open menu">
+    <i class="bi bi-list" id="menu-icon"></i>
+  </button>
+</header>
+
+
+<!-- ═══════════════════════════════════ PAGE HERO ═══ -->
+<section id="page-hero">
+  <div class="page-eyebrow">Exercise Library · 1,100+ Movements</div>
+  <h1 class="page-title gradient-text">Top Exercises &amp;<br>Workout Templates</h1>
+  <p class="page-sub">
+    The most popular movements tracked by Rep users, plus curated workout
+    templates you can import straight into the app.
+  </p>
+</section>
+
+
+<!-- ═══════════════════════════════════ EXERCISES ═══ -->
+<section class="content-section" id="exercises">
+  <div class="section-header">
+    <p class="section-eyebrow">Exercise Library</p>
+    <h2 class="section-title">Top 10 Most Popular Exercises</h2>
+    <p class="section-sub">
+      Ranked by usage across the Rep community — from compound staples to
+      isolation work that never goes out of style.
+    </p>
+  </div>
+
+  <div class="exercise-grid" itemscope itemtype="https://schema.org/ItemList">
+
+    <!-- 1 -->
+    <article class="exercise-card" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <meta itemprop="position" content="1" />
+      <div class="ex-card-top">
+        <div class="ex-icon"><i class="bi bi-chevron-double-up"></i></div>
+        <div class="ex-meta">
+          <div class="ex-rank">#1 Most Popular</div>
+          <div class="ex-name" itemprop="name">Seated Calf Raise</div>
+        </div>
+      </div>
+      <p class="ex-desc">Sit at a calf raise machine, rest the pads on your lower thighs, and drive your heels upward through a full range of motion. The go-to isolation move for building soleus and gastrocnemius size and strength.</p>
+      <div class="ex-tags">
+        <span class="tag tag-muscle"><i class="bi bi-bullseye"></i> Calves</span>
+        <span class="tag tag-equipment"><i class="bi bi-gear-fill"></i> Machine</span>
+        <span class="tag tag-level">Beginner</span>
+      </div>
+    </article>
+
+    <!-- 2 -->
+    <article class="exercise-card" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <meta itemprop="position" content="2" />
+      <div class="ex-card-top">
+        <div class="ex-icon"><i class="bi bi-heart-pulse-fill"></i></div>
+        <div class="ex-meta">
+          <div class="ex-rank">#2 Most Popular</div>
+          <div class="ex-name" itemprop="name">Walking — Treadmill</div>
+        </div>
+      </div>
+      <p class="ex-desc">Set a comfortable pace and incline, maintain an upright posture, and find a steady stride. A low-impact cardio staple for warm-ups, active recovery, or steady-state conditioning.</p>
+      <div class="ex-tags">
+        <span class="tag tag-muscle"><i class="bi bi-bullseye"></i> Quadriceps</span>
+        <span class="tag tag-muscle"><i class="bi bi-circle"></i> Hamstrings · Calves</span>
+        <span class="tag tag-equipment"><i class="bi bi-gear-fill"></i> Machine</span>
+      </div>
+    </article>
+
+    <!-- 3 -->
+    <article class="exercise-card" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <meta itemprop="position" content="3" />
+      <div class="ex-card-top">
+        <div class="ex-icon"><i class="bi bi-arrow-up-circle-fill"></i></div>
+        <div class="ex-meta">
+          <div class="ex-rank">#3 Most Popular</div>
+          <div class="ex-name" itemprop="name">Dumbbell Bicep Curl</div>
+        </div>
+      </div>
+      <p class="ex-desc">Stand with dumbbells at your sides, palms forward, and curl both weights to shoulder height by contracting the biceps. One of the most effective isolation movements for arm size and strength.</p>
+      <div class="ex-tags">
+        <span class="tag tag-muscle"><i class="bi bi-bullseye"></i> Biceps</span>
+        <span class="tag tag-equipment"><i class="bi bi-box-fill"></i> Dumbbell</span>
+        <span class="tag tag-level">Beginner</span>
+      </div>
+    </article>
+
+    <!-- 4 -->
+    <article class="exercise-card" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <meta itemprop="position" content="4" />
+      <div class="ex-card-top">
+        <div class="ex-icon"><i class="bi bi-lightning-charge-fill"></i></div>
+        <div class="ex-meta">
+          <div class="ex-rank">#4 Most Popular</div>
+          <div class="ex-name" itemprop="name">EZ-Bar Skullcrusher</div>
+        </div>
+      </div>
+      <p class="ex-desc">Lie on a bench with an EZ bar at arms' length above you, then lower it toward your forehead by bending only at the elbows. A go-to triceps isolation exercise for building arm mass and lockout strength.</p>
+      <div class="ex-tags">
+        <span class="tag tag-muscle"><i class="bi bi-bullseye"></i> Triceps</span>
+        <span class="tag tag-equipment"><i class="bi bi-dash-lg"></i> EZ Bar</span>
+        <span class="tag tag-level">Beginner</span>
+      </div>
+    </article>
+
+    <!-- 5 -->
+    <article class="exercise-card" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <meta itemprop="position" content="5" />
+      <div class="ex-card-top">
+        <div class="ex-icon"><i class="bi bi-grid-fill"></i></div>
+        <div class="ex-meta">
+          <div class="ex-rank">#5 Most Popular</div>
+          <div class="ex-name" itemprop="name">Leg Press</div>
+        </div>
+      </div>
+      <p class="ex-desc">Seat yourself in the leg press machine and push the sled away by extending your legs, keeping feet shoulder-width apart. A compound quad and glute builder that reduces spinal loading compared to squats.</p>
+      <div class="ex-tags">
+        <span class="tag tag-muscle"><i class="bi bi-bullseye"></i> Quadriceps</span>
+        <span class="tag tag-muscle"><i class="bi bi-circle"></i> Glutes</span>
+        <span class="tag tag-equipment"><i class="bi bi-gear-fill"></i> Machine</span>
+        <span class="tag tag-level">Beginner</span>
+      </div>
+    </article>
+
+    <!-- 6 -->
+    <article class="exercise-card" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <meta itemprop="position" content="6" />
+      <div class="ex-card-top">
+        <div class="ex-icon"><i class="bi bi-align-middle"></i></div>
+        <div class="ex-meta">
+          <div class="ex-rank">#6 Most Popular</div>
+          <div class="ex-name" itemprop="name">Seated Cable Rows</div>
+        </div>
+      </div>
+      <p class="ex-desc">Sit upright at a cable row station and drive your elbows behind you, pulling the V-bar handle to your lower torso. Builds mid-back thickness and reinforces good posture with a constant cable tension.</p>
+      <div class="ex-tags">
+        <span class="tag tag-muscle"><i class="bi bi-bullseye"></i> Back</span>
+        <span class="tag tag-muscle"><i class="bi bi-circle"></i> Biceps</span>
+        <span class="tag tag-equipment"><i class="bi bi-bezier2"></i> Cable</span>
+        <span class="tag tag-level">Beginner</span>
+      </div>
+    </article>
+
+    <!-- 7 -->
+    <article class="exercise-card" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <meta itemprop="position" content="7" />
+      <div class="ex-card-top">
+        <div class="ex-icon"><i class="bi bi-shield-fill"></i></div>
+        <div class="ex-meta">
+          <div class="ex-rank">#7 Most Popular</div>
+          <div class="ex-name" itemprop="name">Barbell Bench Press</div>
+        </div>
+      </div>
+      <p class="ex-desc">Unrack the barbell, lower it to your chest under control, then press back to lockout. The foundational upper-body push movement for chest, shoulder, and triceps strength — a gym staple for good reason.</p>
+      <div class="ex-tags">
+        <span class="tag tag-muscle"><i class="bi bi-bullseye"></i> Chest</span>
+        <span class="tag tag-muscle"><i class="bi bi-circle"></i> Triceps · Shoulders</span>
+        <span class="tag tag-equipment"><i class="bi bi-dash-lg"></i> Barbell</span>
+        <span class="tag tag-level">Beginner</span>
+      </div>
+    </article>
+
+    <!-- 8 -->
+    <article class="exercise-card" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <meta itemprop="position" content="8" />
+      <div class="ex-card-top">
+        <div class="ex-icon"><i class="bi bi-stars"></i></div>
+        <div class="ex-meta">
+          <div class="ex-rank">#8 Most Popular</div>
+          <div class="ex-name" itemprop="name">Dumbbell Shoulder Press</div>
+        </div>
+      </div>
+      <p class="ex-desc">Press dumbbells from shoulder height to full extension overhead, keeping your core braced throughout. Builds pressing strength and shoulder width through a natural arc of motion that spares the joints.</p>
+      <div class="ex-tags">
+        <span class="tag tag-muscle"><i class="bi bi-bullseye"></i> Shoulders</span>
+        <span class="tag tag-muscle"><i class="bi bi-circle"></i> Triceps</span>
+        <span class="tag tag-equipment"><i class="bi bi-box-fill"></i> Dumbbell</span>
+        <span class="tag tag-level">Intermediate</span>
+      </div>
+    </article>
+
+    <!-- 9 -->
+    <article class="exercise-card" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <meta itemprop="position" content="9" />
+      <div class="ex-card-top">
+        <div class="ex-icon"><i class="bi bi-arrow-up-circle"></i></div>
+        <div class="ex-meta">
+          <div class="ex-rank">#9 Most Popular</div>
+          <div class="ex-name" itemprop="name">Hammer Curls</div>
+        </div>
+      </div>
+      <p class="ex-desc">Hold dumbbells with a neutral grip (palms facing each other) and curl both arms simultaneously. Targets the biceps brachii and brachialis together for fuller, thicker arms that look great from every angle.</p>
+      <div class="ex-tags">
+        <span class="tag tag-muscle"><i class="bi bi-bullseye"></i> Biceps · Brachialis</span>
+        <span class="tag tag-equipment"><i class="bi bi-box-fill"></i> Dumbbell</span>
+        <span class="tag tag-level">Beginner</span>
+      </div>
+    </article>
+
+    <!-- 10 -->
+    <article class="exercise-card" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <meta itemprop="position" content="10" />
+      <div class="ex-card-top">
+        <div class="ex-icon"><i class="bi bi-arrow-repeat"></i></div>
+        <div class="ex-meta">
+          <div class="ex-rank">#10 Most Popular</div>
+          <div class="ex-name" itemprop="name">Leg Extensions</div>
+        </div>
+      </div>
+      <p class="ex-desc">Sit in the leg extension machine and extend your legs to full lockout under control. An isolation exercise that directly targets the quadriceps without axial load — ideal for finishing a leg session or knee rehab.</p>
+      <div class="ex-tags">
+        <span class="tag tag-muscle"><i class="bi bi-bullseye"></i> Quadriceps</span>
+        <span class="tag tag-equipment"><i class="bi bi-gear-fill"></i> Machine</span>
+        <span class="tag tag-level">Beginner</span>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════ TEMPLATES ═══ -->
+<section class="content-section" id="templates" style="background: var(--surface);">
+  <div class="section-header">
+    <p class="section-eyebrow">Curated Workouts</p>
+    <h2 class="section-title">Popular Workout Templates</h2>
+    <p class="section-sub">
+      Founder-curated workout programs ready to import into Rep with one tap.
+      More templates coming soon.
+    </p>
+  </div>
+
+  <div class="template-grid">
+
+    <!-- Placeholder 1 -->
+    <div class="template-card coming-soon">
+      <span class="tpl-badge">Coming Soon</span>
+      <div class="tpl-icon"><i class="bi bi-arrow-up-right-circle-fill"></i></div>
+      <div class="tpl-split">Push Day</div>
+      <div class="tpl-name">Classic Push Day A</div>
+      <p class="tpl-desc">Chest-led push session with shoulder and triceps accessories. Balanced volume for strength and hypertrophy.</p>
+      <div class="tpl-muscles">
+        <span class="tag tag-muscle">Chest</span>
+        <span class="tag tag-muscle">Shoulders</span>
+        <span class="tag tag-muscle">Triceps</span>
+      </div>
+    </div>
+
+    <!-- Placeholder 2 -->
+    <div class="template-card coming-soon">
+      <span class="tpl-badge">Coming Soon</span>
+      <div class="tpl-icon"><i class="bi bi-arrow-down-left-circle-fill"></i></div>
+      <div class="tpl-split">Pull Day</div>
+      <div class="tpl-name">Classic Pull Day A</div>
+      <p class="tpl-desc">Back-focused pulling session with rowing and pull-down movements, finished with targeted biceps work.</p>
+      <div class="tpl-muscles">
+        <span class="tag tag-muscle">Back</span>
+        <span class="tag tag-muscle">Biceps</span>
+        <span class="tag tag-muscle">Rear Delts</span>
+      </div>
+    </div>
+
+    <!-- Placeholder 3 -->
+    <div class="template-card coming-soon">
+      <span class="tpl-badge">Coming Soon</span>
+      <div class="tpl-icon"><i class="bi bi-grid-3x3-gap-fill"></i></div>
+      <div class="tpl-split">Leg Day</div>
+      <div class="tpl-name">Classic Leg Day</div>
+      <p class="tpl-desc">Squat-pattern primary with leg press, hamstring curls, and calf work. Structured for progressive overload over 4-week cycles.</p>
+      <div class="tpl-muscles">
+        <span class="tag tag-muscle">Quads</span>
+        <span class="tag tag-muscle">Hamstrings</span>
+        <span class="tag tag-muscle">Glutes</span>
+      </div>
+    </div>
+
+    <!-- Placeholder 4 -->
+    <div class="template-card coming-soon">
+      <span class="tpl-badge">Coming Soon</span>
+      <div class="tpl-icon"><i class="bi bi-layout-wtf"></i></div>
+      <div class="tpl-split">Full Body</div>
+      <div class="tpl-name">Full Body Strength</div>
+      <p class="tpl-desc">One session hits every major muscle group. Ideal for 2–3 days per week training. Pairs a compound push, pull, and leg movement each session.</p>
+      <div class="tpl-muscles">
+        <span class="tag tag-muscle">Full Body</span>
+      </div>
+    </div>
+
+    <!-- Placeholder 5 -->
+    <div class="template-card coming-soon">
+      <span class="tpl-badge">Coming Soon</span>
+      <div class="tpl-icon"><i class="bi bi-columns-gap"></i></div>
+      <div class="tpl-split">Upper / Lower</div>
+      <div class="tpl-name">Upper Body Day</div>
+      <p class="tpl-desc">Horizontal and vertical push/pull supersets for efficient upper body training. Great for 4-day Upper/Lower splits.</p>
+      <div class="tpl-muscles">
+        <span class="tag tag-muscle">Chest</span>
+        <span class="tag tag-muscle">Back</span>
+        <span class="tag tag-muscle">Shoulders</span>
+        <span class="tag tag-muscle">Arms</span>
+      </div>
+    </div>
+
+    <!-- Placeholder 6 -->
+    <div class="template-card coming-soon">
+      <span class="tpl-badge">Coming Soon</span>
+      <div class="tpl-icon"><i class="bi bi-columns"></i></div>
+      <div class="tpl-split">Upper / Lower</div>
+      <div class="tpl-name">Lower Body Day</div>
+      <p class="tpl-desc">Quad and hip-hinge focused lower session to pair with Upper Body Day. Includes unilateral work for balanced development.</p>
+      <div class="tpl-muscles">
+        <span class="tag tag-muscle">Quads</span>
+        <span class="tag tag-muscle">Hamstrings</span>
+        <span class="tag tag-muscle">Calves</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════ CTA ═══ -->
+<section id="cta">
+  <p class="section-eyebrow" style="margin-bottom:0.5rem;">Available now on iOS</p>
+  <h2>Track every rep. Progress every week.</h2>
+  <p>Download Rep free on the App Store. All 1,100+ exercises and these templates are waiting inside the app.</p>
+  <div class="cta-btns">
+    <a class="btn btn-primary btn-lg" href="https://apps.apple.com/us/app/rep-the-workout-app/id6765540272" target="_blank" rel="noopener noreferrer">
+      <i class="bi bi-apple"></i> Download on App Store
+    </a>
+    <a class="btn btn-outline btn-lg" href="index.html#features">
+      <i class="bi bi-play-circle"></i> Explore features
+    </a>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════ FOOTER ═══ -->
+<footer>
+  <div class="footer-brand">
+    <div class="footer-brand-logo">
+      <img class="logo-img" src="assets/icon.png" alt="Rep logo" style="width:40px;height:40px;border-radius:10px;" />
+      <span class="logo-name">Rep</span>
+    </div>
+    <p class="footer-tagline">The workout tracker<br>that adapts to you.</p>
+  </div>
+
+  <div class="footer-col">
+    <h4>Get the app</h4>
+    <a href="https://apps.apple.com/us/app/rep-the-workout-app/id6765540272" target="_blank" rel="noopener noreferrer">Download on App Store</a>
+    <a href="mailto:rep.app.dev@gmail.com?subject=Android%20Beta%20Request">Android Beta Request</a>
+    <a href="invite/">Invite a Friend</a>
+  </div>
+
+  <div class="footer-col">
+    <h4>Legal &amp; Support</h4>
+    <a href="privacy.html">Privacy Policy</a>
+    <a href="tos.html">Terms of Service</a>
+    <a href="faq.html">FAQ</a>
+    <a href="delete-account.html">Delete Account</a>
+    <a href="mailto:rep.app.dev@gmail.com">Contact</a>
+  </div>
+
+  <p class="footer-bottom">
+    &copy; 2026 Rep — The Workout App &nbsp;·&nbsp; Questions? <a href="mailto:rep.app.dev@gmail.com" style="color:var(--accent-text);">rep.app.dev@gmail.com</a>
+  </p>
+</footer>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js" integrity="sha512-NcZdtrT77bJr4STcmsGAESr06BYGE8woZdSdEgqnpyqac7sugNO+Tr4bGwGF3MsnEkGKhU2KL2xh6Ec+BqsaHA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js" integrity="sha512-P2IDYZfqSwjcSjX0BKeNhwRUH8zRPGlgcWl5n6gBLzdi4Y5/0O4zaXrtO4K9TZK6Hn1BenYpKowuCavNandERg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script>
+  const siteHeader = document.getElementById('site-header');
+  window.addEventListener('scroll', () => {
+    siteHeader.classList.toggle('scrolled', window.scrollY > 20);
+  }, { passive: true });
+
+  const navCollapse = document.getElementById('nav-collapse');
+  const menuIcon = document.getElementById('menu-icon');
+  let navOpen = false;
+
+  function toggleNav() {
+    navOpen = !navOpen;
+    navCollapse.classList.toggle('open', navOpen);
+    menuIcon.className = navOpen ? 'bi bi-x' : 'bi bi-list';
+    if (navOpen) {
+      setTimeout(() => window.addEventListener('click', onNavOutside), 10);
+    } else {
+      window.removeEventListener('click', onNavOutside);
+    }
+  }
+
+  function onNavOutside(e) {
+    const btn = document.getElementById('menu-btn');
+    if (!navCollapse.contains(e.target) && !btn.contains(e.target)) toggleNav();
+  }
+
+  navCollapse.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => { if (navOpen) toggleNav(); });
+  });
+
+  if (!window.gsap || !window.ScrollTrigger) {
+    // CDN failed — undo the pre-hide so content stays visible
+    document.documentElement.classList.remove('js');
+  } else {
+    gsap.registerPlugin(ScrollTrigger);
+
+    const mm = gsap.matchMedia();
+    mm.add('(prefers-reduced-motion: no-preference)', () => {
+      const items = gsap.utils.toArray('.exercise-card, .template-card, .section-header');
+      gsap.set(items, { y: 28 });
+      ScrollTrigger.batch(items, {
+        start: 'top 90%',
+        once: true,
+        onEnter: (batch) => gsap.to(batch, {
+          autoAlpha: 1, y: 0,
+          duration: 0.6,
+          stagger: 0.08,
+          ease: 'power3.out',
+          // clear inline opacity afterwards so .coming-soon cards get their CSS opacity back
+          // (keep inline visibility — the html.js pre-hide rule would re-apply without it)
+          onComplete: () => gsap.set(batch, { clearProps: 'opacity,transform' }),
+        }),
+      });
+    });
+  }
+</script>
+
+</body>
+</html>

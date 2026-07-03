@@ -224,6 +224,22 @@
     @media (max-width: 480px) {
       .contact-row { flex-direction: column; align-items: flex-start; }
     }
+
+    /* ── Page entrance & cross-page transitions ── */
+    @view-transition { navigation: auto; }
+    ::view-transition-old(root),
+    ::view-transition-new(root) { animation-duration: 0.28s; }
+    header { view-transition-name: site-header; }
+
+    @media (prefers-reduced-motion: no-preference) {
+      main { animation: page-enter 0.55s cubic-bezier(0.22, 1, 0.36, 1) both; }
+    }
+    @keyframes page-enter {
+      from { opacity: 0; transform: translateY(14px); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      @view-transition { navigation: none; }
+    }
   </style>
 </head>
 <body>
