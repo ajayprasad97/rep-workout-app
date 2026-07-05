@@ -470,6 +470,61 @@
       line-height: 1.6;
     }
 
+    /* ── Comparison ── */
+    #comparison {
+      padding: 96px 8%;
+      background: var(--bg);
+    }
+    .compare-table-wrap {
+      margin-top: 2.5rem;
+      overflow-x: auto;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: var(--surface);
+    }
+    .compare-table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 640px;
+      font-size: 0.85rem;
+    }
+    .compare-table th,
+    .compare-table td {
+      padding: 0.9rem 1.1rem;
+      text-align: left;
+      border-bottom: 1px solid var(--divider);
+      white-space: nowrap;
+    }
+    .compare-table td:first-child,
+    .compare-table th:first-child {
+      color: var(--text-sub);
+      white-space: normal;
+      min-width: 220px;
+    }
+    .compare-table thead th {
+      font-weight: 600;
+      color: var(--text);
+      font-size: 0.9rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .compare-table tbody tr:last-child td { border-bottom: none; }
+    .compare-table td, .compare-table th { color: var(--text-sub); }
+    .compare-table .compare-highlight {
+      background: var(--accent-muted);
+      color: var(--text);
+      font-weight: 500;
+    }
+    .compare-table thead th.compare-highlight {
+      color: var(--accent-text);
+      font-weight: 700;
+    }
+    .compare-table .compare-check { color: var(--accent-text); font-size: 1rem; }
+    .compare-table .compare-dash { color: var(--text-muted); }
+    .compare-footnote {
+      margin-top: 0.9rem;
+      font-size: 0.76rem;
+      color: var(--text-muted);
+    }
 
     /* ── CTA section ── */
     #cta {
@@ -547,6 +602,11 @@
     }
     @media (max-width: 520px) {
       .cards-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      #comparison { padding: 72px 6%; }
+      .compare-table { font-size: 0.78rem; }
+      .compare-table th, .compare-table td { padding: 0.75rem 0.85rem; }
     }
     @media (max-width: 1024px) {
       #menu-btn { display: block; }
@@ -818,6 +878,60 @@
 </section>
 
 
+<!-- ═══════════════════════════════════════ COMPARISON ═══ -->
+<section id="comparison">
+  <div class="reveal-up">
+    <p class="section-eyebrow">How Rep compares</p>
+    <h2 class="section-title">See the difference for yourself</h2>
+  </div>
+
+  <div class="compare-table-wrap reveal-up">
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th></th>
+          <th class="compare-highlight">Rep</th>
+          <th>Hevy</th>
+          <th>Strong</th>
+          <th>Fitbod</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Price</td>
+          <td class="compare-highlight">Free — and free for life if you join now</td>
+          <td>Free, Pro from $2.99/mo</td>
+          <td>Free, Pro from $4.99/mo</td>
+          <td>From $15.99/mo, no lasting free tier</td>
+        </tr>
+        <tr>
+          <td>Social feed</td>
+          <td class="compare-highlight"><i class="bi bi-check-lg compare-check"></i></td>
+          <td><i class="bi bi-check-lg compare-check"></i></td>
+          <td><span class="compare-dash">—</span></td>
+          <td><span class="compare-dash">—</span></td>
+        </tr>
+        <tr>
+          <td>Recovery insights from your wearable (sleep, HRV)</td>
+          <td class="compare-highlight"><i class="bi bi-check-lg compare-check"></i></td>
+          <td><span class="compare-dash">—</span></td>
+          <td><span class="compare-dash">—</span></td>
+          <td>Estimated from logged sets only</td>
+        </tr>
+        <tr>
+          <td>Import your history when you switch</td>
+          <td class="compare-highlight">Hevy, Strong, Fitbod &amp; more</td>
+          <td><span class="compare-dash">—</span></td>
+          <td><span class="compare-dash">—</span></td>
+          <td><span class="compare-dash">—</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="compare-footnote reveal-up">Based on publicly available pricing and feature info as of July 2026 — features and pricing change often, so double-check before you switch.</p>
+</section>
+
+
 <!-- ═══════════════════════════════════════ CTA ═══ -->
 <section id="cta">
   <div class="cta-inner">
@@ -868,6 +982,7 @@
     <h4>Legal &amp; Support</h4>
     <a href="privacy.html">Privacy Policy</a>
     <a href="tos.html">Terms of Service</a>
+    <a href="community-guidelines.html">Community Guidelines</a>
     <a href="faq.html">FAQ</a>
     <a href="delete-account.html">Delete Account</a>
     <a href="mailto:rep.app.dev@gmail.com">Contact</a>

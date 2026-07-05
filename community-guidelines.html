@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Changelog — Rep: The Workout App</title>
+  <title>Community Guidelines — Rep: The Workout App</title>
+  <link rel="canonical" href="https://repworkout.app/community-guidelines" />
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    /* ── Sand & Clay theme ── */
     :root {
       --bg:            #F7EEDC;
       --surface:       #FCF6E9;
@@ -41,7 +41,6 @@
       flex-direction: column;
     }
 
-    /* ── Header ── */
     header {
       background: var(--surface);
       border-bottom: 1px solid var(--border);
@@ -60,7 +59,6 @@
     .btn-join { margin-left: 0.5rem; padding: 7px 18px; border-radius: 50px; background: var(--accent); color: var(--accent-fg); font-size: 0.82rem; font-weight: 600; text-decoration: none; white-space: nowrap; transition: opacity 0.2s; }
     .btn-join:hover { opacity: 0.85; }
 
-    /* ── Main layout ── */
     main {
       flex: 1;
       max-width: 680px;
@@ -69,7 +67,6 @@
       padding: 2rem 1.25rem 3.5rem;
     }
 
-    /* ── Page heading ── */
     .page-heading {
       margin-bottom: 1.75rem;
     }
@@ -84,28 +81,29 @@
       color: var(--text-sub);
     }
 
-    /* ── Version heading ── */
-    .version-heading {
-      display: flex;
-      align-items: baseline;
-      justify-content: space-between;
-      gap: 0.75rem;
+    .overview {
+      background: var(--accent-muted);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+      border-radius: 10px;
+      padding: 0.875rem 1rem;
+      font-size: 0.84rem;
+      color: var(--text-sub);
+      line-height: 1.65;
+      margin-bottom: 2rem;
+    }
+    .overview strong { color: var(--text); }
+
+    h2 {
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
       margin-bottom: 0.55rem;
       margin-top: 2rem;
     }
-    .version-heading:first-of-type { margin-top: 0; }
-    .version-heading h2 {
-      font-size: 0.95rem;
-      font-weight: 600;
-      color: var(--text);
-    }
-    .version-heading .version-date {
-      font-size: 0.76rem;
-      color: var(--text-muted);
-      white-space: nowrap;
-    }
 
-    /* ── Cards ── */
     .card {
       background: var(--surface);
       border: 1px solid var(--border);
@@ -114,38 +112,57 @@
       margin-bottom: 1rem;
     }
 
-    /* ── Content rows inside cards ── */
     .content-row {
       padding: 0.875rem 1rem;
       border-bottom: 1px solid var(--divider);
     }
     .content-row:last-child { border-bottom: none; }
-    .content-row .sub-heading {
-      font-size: 0.78rem;
-      font-weight: 600;
-      letter-spacing: 0.03em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      margin-bottom: 0.4rem;
-    }
-    .content-row:not(:first-child) .sub-heading {
-      margin-top: 0.25rem;
+    .content-row h3 {
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 0.25rem;
     }
     .content-row p,
-    .content-row ul {
+    .content-row ul,
+    .content-row ol {
       font-size: 0.81rem;
       color: var(--text-sub);
       line-height: 1.65;
     }
-    .content-row ul {
+    .content-row ul,
+    .content-row ol {
       padding-left: 1.1rem;
       margin-top: 0.3rem;
     }
-    .content-row li { margin-bottom: 0.3rem; }
+    .content-row li { margin-bottom: 0.25rem; }
+    .content-row li strong { color: var(--text); font-weight: 500; }
     .content-row a { color: var(--accent-text); text-decoration: none; }
     .content-row a:hover { text-decoration: underline; }
 
-    /* ── Contact box ── */
+    .callout {
+      border-radius: 10px;
+      padding: 0.875rem 1rem;
+      font-size: 0.81rem;
+      color: var(--text-sub);
+      line-height: 1.65;
+      margin-bottom: 1rem;
+    }
+    .callout.info {
+      background: var(--info-bg);
+      border: 1px solid var(--border);
+      border-left: 3px solid #735440;
+    }
+    .callout.warn {
+      background: var(--danger-bg);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+    }
+    .callout p { margin: 0; }
+    .callout p + p { margin-top: 0.5rem; }
+    .callout strong { color: var(--text); font-weight: 500; }
+    .callout a { color: var(--accent-text); }
+
     .contact-row {
       display: flex;
       align-items: center;
@@ -180,7 +197,6 @@
     }
     .btn:hover { opacity: 0.85; }
 
-    /* ── Footer ── */
     footer {
       border-top: 1px solid var(--border);
       background: var(--surface);
@@ -194,7 +210,6 @@
 
     @media (max-width: 480px) {
       .contact-row { flex-direction: column; align-items: flex-start; }
-      .version-heading { flex-direction: column; align-items: flex-start; gap: 0.15rem; }
       main { padding: 1.5rem 1rem 2.5rem; }
     }
 
@@ -232,76 +247,98 @@
 
   <main>
     <div class="page-heading">
-      <h1>Changelog</h1>
-      <p>What's new in Rep, release by release. We ship roughly every two weeks.</p>
+      <h1>Community Guidelines</h1>
+      <p>Effective Date: July 5, 2026 &nbsp;·&nbsp; Last Updated: July 5, 2026</p>
     </div>
 
-    <div class="version-heading">
-      <h2>Version 1.0.2</h2>
-      <span class="version-date">July 2026</span>
+    <div class="overview">
+      <strong>Plain-language summary:</strong> Rep's social feed is for sharing real training, supporting other lifters, and staying accountable. Be respectful, be honest, and report anything that isn't. These Guidelines work alongside our <a href="tos.html">Terms of Service</a> — if the two ever conflict, the Terms govern.
     </div>
+
+    <!-- 1. Our Community -->
+    <h2>1. Our Community</h2>
     <div class="card">
       <div class="content-row">
-        <p class="sub-heading">New</p>
-        <ul>
-          <li>Import your workout history from Hevy or Strong, on top of existing Fitbod support</li>
-          <li>Recovery suggestions now account for specific muscle heads (chest, shoulders, biceps, triceps), not just the muscle group as a whole</li>
-          <li>The plate calculator now uses the actual plates you've told it your Workout Space owns</li>
-          <li>Android push notifications now work</li>
-        </ul>
-      </div>
-      <div class="content-row">
-        <p class="sub-heading">Fixed</p>
-        <ul>
-          <li>Sleep, resting heart rate, and HRV could get stuck showing old readings instead of your latest data</li>
-          <li>Personal record trophies could disappear if you left a session and came back</li>
-          <li>Personal records are now compared correctly whether you log in kg or lbs</li>
-          <li>Several keyboard overlap issues across settings and other screens</li>
-          <li>Exercise search now ignores extra spaces ("push down" now matches "Pushdown")</li>
-        </ul>
-      </div>
-      <div class="content-row">
-        <p class="sub-heading">Security &amp; stability</p>
-        <ul>
-          <li>Tightened up permissions around notifications and blocked-user data</li>
-          <li>General backend hardening and stability improvements</li>
-        </ul>
+        <p>Rep's social feed exists to help people train consistently — sharing workouts, cheering on friends, and following other athletes. These Guidelines apply anywhere you interact with others in the app: posts, comments, display names, profile photos, and direct interactions like follows and buddy sessions.</p>
       </div>
     </div>
 
-    <div class="version-heading">
-      <h2>Version 1.0.0 / 1.0.1</h2>
-      <span class="version-date">June 2026</span>
-    </div>
+    <!-- 2. Be Respectful -->
+    <h2>2. Be Respectful</h2>
     <div class="card">
       <div class="content-row">
-        <p class="sub-heading">Rep is live!</p>
-        <p>Our initial App Store release.</p>
-      </div>
-      <div class="content-row">
-        <p class="sub-heading">New</p>
+        <p>Not allowed, anywhere in the app:</p>
         <ul>
-          <li>Report incorrect exercise info — wrong equipment, weight input, name, or muscles — right from your workout</li>
-          <li>See who liked your posts, with follow, block, and report options</li>
-          <li>A dedicated notifications screen</li>
-          <li>Sleep and HRV history tracking</li>
-          <li>Smarter exercise search that understands alternate names</li>
+          <li>Harassment, bullying, threats, or targeted abuse of another user.</li>
+          <li>Hate speech or content that attacks people based on race, ethnicity, religion, gender, sexual orientation, disability, or similar characteristics.</li>
+          <li>Sexually explicit content, nudity, or content sexualizing another person without consent.</li>
+          <li>Impersonating another person, brand, or the Rep team.</li>
+          <li>Spam, scams, or repeatedly promoting unrelated products or services.</li>
         </ul>
-      </div>
-      <div class="content-row">
-        <p class="sub-heading">Fixed</p>
-        <p>Various bug fixes and stability improvements ahead of launch.</p>
       </div>
     </div>
 
-    <!-- Contact -->
-    <div class="card" style="margin-top:2rem;margin-bottom:0;">
+    <!-- 3. Be Honest -->
+    <h2>3. Be Honest</h2>
+    <div class="card">
+      <div class="content-row">
+        <p>Rep works best when the data behind it is real. Please don't:</p>
+        <ul>
+          <li>Fabricate workouts, weights, or personal records to mislead other users.</li>
+          <li>Use bots, scripts, or automated tools to post, like, or follow on your behalf.</li>
+          <li>Create multiple accounts to evade a block, report, or suspension.</li>
+        </ul>
+        <p style="margin-top:0.4rem;">Progress looks different for everyone — there's no benefit to inflating your numbers, and it undermines the community for people training honestly.</p>
+      </div>
+    </div>
+
+    <!-- 4. Display Names & Profiles -->
+    <h2>4. Display Names &amp; Profiles</h2>
+    <div class="card">
+      <div class="content-row">
+        <p>Your display name and profile photo must be appropriate for a general audience — no profanity, slurs, sexually explicit content, or impersonation. See <a href="tos.html">Terms of Service, Section 5</a> for how we handle violations.</p>
+      </div>
+    </div>
+
+    <!-- 5. Reporting & Blocking -->
+    <h2>5. Reporting &amp; Blocking</h2>
+    <div class="card">
+      <div class="content-row">
+        <h3>In the app</h3>
+        <p>You can report or block any user directly from their profile, a post, or the likers list on a post. Blocking is immediate and mutual — a blocked user can no longer see your posts, follow you, or interact with you, and you won't see theirs.</p>
+      </div>
+      <div class="content-row">
+        <h3>What to report</h3>
+        <p>Report content or accounts that violate these Guidelines — harassment, hate speech, impersonation, spam, or anything that made you feel unsafe. You don't need to block and report at the same time; they're independent actions.</p>
+      </div>
+      <div class="callout info">
+        <p>Reporting incorrect <strong>exercise data</strong> (wrong equipment, weight input, or muscle group) is a separate flow — use the flag icon on an exercise or the ••• menu during a workout. That goes to our exercise-data review queue, not community moderation.</p>
+      </div>
+    </div>
+
+    <!-- 6. Enforcement -->
+    <h2>6. Enforcement</h2>
+    <div class="card">
+      <div class="content-row">
+        <p>We review reports and act proportionally to the violation:</p>
+        <ul>
+          <li><strong>Minor or first-time issues</strong> (e.g. an inappropriate display name): a warning and a chance to fix it, typically within 7 days.</li>
+          <li><strong>Repeated or moderate issues:</strong> temporary restriction of posting or social features.</li>
+          <li><strong>Severe issues</strong> (threats, hate speech, sexual content involving minors, illegal activity): immediate and permanent account suspension, without prior warning.</li>
+        </ul>
+        <p style="margin-top:0.4rem;">This mirrors the moderation process described in <a href="tos.html">Terms of Service, Section 5</a>.</p>
+      </div>
+    </div>
+
+    <!-- 7. Appeals -->
+    <h2>7. Appeals</h2>
+    <div class="card" style="margin-bottom:0.75rem;">
       <div class="contact-row">
         <div class="contact-row-left">
-          <strong>Have feedback on a release?</strong>
-          <p>We'll get back to you as soon as we can.</p>
+          <strong>Think we got it wrong?</strong>
+          <p>Email us and we'll take a second look. We'll respond within 30 days.</p>
         </div>
-        <a class="btn" href="mailto:rep.app.dev@gmail.com?subject=Rep%20Changelog%20Feedback">
+        <a class="btn" href="mailto:rep.app.dev@gmail.com?subject=Community%20Guidelines%20Appeal">
           Email us ↗
         </a>
       </div>
