@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>FAQ — Rep: The Workout App</title>
+  <title>Changelog — Rep: The Workout App</title>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -84,17 +84,26 @@
       color: var(--text-sub);
     }
 
-    /* ── Section heading (h2) ── */
-    h2 {
-      font-size: 0.68rem;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--text-muted);
+    /* ── Version heading ── */
+    .version-heading {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 0.75rem;
       margin-bottom: 0.55rem;
       margin-top: 2rem;
     }
-    h2:first-of-type { margin-top: 0; }
+    .version-heading:first-of-type { margin-top: 0; }
+    .version-heading h2 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .version-heading .version-date {
+      font-size: 0.76rem;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
 
     /* ── Cards ── */
     .card {
@@ -111,65 +120,30 @@
       border-bottom: 1px solid var(--divider);
     }
     .content-row:last-child { border-bottom: none; }
-    .content-row h3 {
-      font-size: 0.88rem;
-      font-weight: 500;
-      color: var(--text);
-      margin-bottom: 0.5rem;
+    .content-row .sub-heading {
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 0.4rem;
+    }
+    .content-row:not(:first-child) .sub-heading {
+      margin-top: 0.25rem;
     }
     .content-row p,
-    .content-row ul,
-    .content-row ol {
+    .content-row ul {
       font-size: 0.81rem;
       color: var(--text-sub);
       line-height: 1.65;
     }
-    .content-row ul,
-    .content-row ol {
+    .content-row ul {
       padding-left: 1.1rem;
       margin-top: 0.3rem;
     }
-    .content-row li { margin-bottom: 0.25rem; }
-    .content-row li strong { color: var(--text); font-weight: 500; }
+    .content-row li { margin-bottom: 0.3rem; }
     .content-row a { color: var(--accent-text); text-decoration: none; }
     .content-row a:hover { text-decoration: underline; }
-    .content-row code {
-      background: var(--surface-alt);
-      border-radius: 4px;
-      padding: 1px 5px;
-      font-size: 0.78rem;
-      color: var(--accent-text);
-      font-family: 'SF Mono', 'Fira Mono', monospace;
-    }
-    .content-row .sub-heading {
-      font-size: 0.81rem;
-      font-weight: 600;
-      color: var(--text);
-      margin-top: 0.75rem;
-      margin-bottom: 0.25rem;
-    }
-
-    /* ── Callout boxes ── */
-    .callout {
-      border-radius: 10px;
-      padding: 0.875rem 1rem;
-      font-size: 0.81rem;
-      color: var(--text-sub);
-      line-height: 1.65;
-      margin-top: 0.6rem;
-    }
-    .callout.info {
-      background: var(--info-bg);
-      border: 1px solid var(--border);
-      border-left: 3px solid #735440;
-    }
-    .callout.note {
-      background: var(--surface-muted);
-      border: 1px solid var(--border);
-      border-left: 3px solid var(--accent);
-    }
-    .callout p { margin: 0; }
-    .callout strong { color: var(--text); font-weight: 500; }
 
     /* ── Contact box ── */
     .contact-row {
@@ -220,6 +194,7 @@
 
     @media (max-width: 480px) {
       .contact-row { flex-direction: column; align-items: flex-start; }
+      .version-heading { flex-direction: column; align-items: flex-start; gap: 0.15rem; }
       main { padding: 1.5rem 1rem 2.5rem; }
     }
 
@@ -257,73 +232,65 @@
 
   <main>
     <div class="page-heading">
-      <h1>Frequently Asked Questions</h1>
-      <p>Answers to common questions about how Rep works.</p>
+      <h1>Changelog</h1>
+      <p>What's new in Rep, release by release. We ship roughly every two weeks.</p>
     </div>
 
-    <!-- Calories & Activity -->
-    <h2>Calories &amp; Activity</h2>
+    <div class="version-heading">
+      <h2>Version 1.0.2</h2>
+      <span class="version-date">July 2026</span>
+    </div>
     <div class="card">
       <div class="content-row">
-        <h3>How does Rep estimate calories burned during a workout?</h3>
-        <p>Rep uses two sources for calorie data, in order of accuracy:</p>
-
-        <p class="sub-heading">1. Your wearable (when connected)</p>
-        <p>If you have Apple Health or Google Health Connect set up and a compatible wearable, Rep reads the active calories your device recorded during the session. This is based on your heart rate, movement, and personal stats — calculated by your wearable's own algorithms, not by Rep.</p>
-        <p style="margin-top:0.5rem;">Compatible devices:</p>
+        <p class="sub-heading">New</p>
         <ul>
-          <li><strong>iOS:</strong> Apple Watch, Garmin, Polar, WHOOP (any device that writes to Apple Health)</li>
-          <li><strong>Android:</strong> Samsung Galaxy Watch, Fitbit, Garmin, Pixel Watch (any device that writes to Health Connect)</li>
+          <li>Import your workout history from Hevy or Strong, on top of existing Fitbod support</li>
+          <li>Recovery suggestions now account for specific muscle heads (chest, shoulders, biceps, triceps), not just the muscle group as a whole</li>
+          <li>The plate calculator now uses the actual plates you've told it your Workout Space owns</li>
+          <li>Android push notifications now work</li>
         </ul>
-        <div class="callout note">
-          <p><strong>Note:</strong> Fitbit on iPhone does not sync to Apple Health (Fitbit dropped that integration in 2022), so iOS Fitbit users will see an estimate instead.</p>
-        </div>
-
-        <p class="sub-heading">2. MET-based estimate (when no wearable data is available)</p>
-        <p>If no wearable calories are recorded, Rep calculates an estimate using the MET (Metabolic Equivalent of Task) formula — the same method used by exercise scientists and most fitness apps:</p>
-        <p style="margin-top:0.5rem;"><code>Calories = MET × Body Weight (kg) × Duration (hours)</code></p>
-        <p style="margin-top:0.5rem;">Rep uses a MET of <strong>3.5</strong> for strength training sessions, which is the established value for moderate-intensity resistance exercise. Your body weight is pulled from Apple Health or Health Connect if available, or from your profile if not.</p>
-        <div class="callout info" style="margin-top:0.5rem;">
-          <p>This is an estimate. Individual calorie burn varies based on fitness level, intensity, and other factors — treat it as a useful ballpark, not a precise measurement.</p>
-        </div>
+      </div>
+      <div class="content-row">
+        <p class="sub-heading">Fixed</p>
+        <ul>
+          <li>Sleep, resting heart rate, and HRV could get stuck showing old readings instead of your latest data</li>
+          <li>Personal record trophies could disappear if you left a session and came back</li>
+          <li>Personal records are now compared correctly whether you log in kg or lbs</li>
+          <li>Several keyboard overlap issues across settings and other screens</li>
+          <li>Exercise search now ignores extra spaces ("push down" now matches "Pushdown")</li>
+        </ul>
+      </div>
+      <div class="content-row">
+        <p class="sub-heading">Security &amp; stability</p>
+        <ul>
+          <li>Tightened up permissions around notifications and blocked-user data</li>
+          <li>General backend hardening and stability improvements</li>
+        </ul>
       </div>
     </div>
 
-    <!-- Data & Privacy -->
-    <h2>Data &amp; Privacy</h2>
-    <div class="card">
-      <div class="content-row">
-        <h3>Does my data sync across devices, and how is it stored?</h3>
-        <p>See our <a href="privacy.html">Privacy Policy</a> for full details on what we collect, how your data is stored, and how syncing works.</p>
-      </div>
+    <div class="version-heading">
+      <h2>Version 1.0.0 / 1.0.1</h2>
+      <span class="version-date">June 2026</span>
     </div>
-
-    <!-- Account & Subscription -->
-    <h2>Account &amp; Subscription</h2>
     <div class="card">
       <div class="content-row">
-        <h3>Is Rep free?</h3>
-        <p>Rep is free for as long as it's free for us to run. Once our infrastructure costs require it, we'll introduce a paid plan — but everyone who signs up while it's free keeps free access for good.</p>
+        <p class="sub-heading">Rep is live!</p>
+        <p>Our initial App Store release.</p>
       </div>
       <div class="content-row">
-        <h3>Can I export my workout data?</h3>
-        <p>Yes — head to <strong>Settings → Export</strong> to download your full workout history. We're also working on a Skill that reads your exported data to surface deeper insights, so stay tuned.</p>
-      </div>
-    </div>
-
-    <!-- Updates -->
-    <h2>Updates &amp; Development</h2>
-    <div class="card">
-      <div class="content-row">
-        <h3>How often is Rep updated?</h3>
-        <p>We ship a new version roughly every two weeks, with bug fixes, performance improvements, and new features based on user feedback. See the <a href="changelog.html">changelog</a> for what's new in each release.</p>
+        <p class="sub-heading">New</p>
+        <ul>
+          <li>Report incorrect exercise info — wrong equipment, weight input, name, or muscles — right from your workout</li>
+          <li>See who liked your posts, with follow, block, and report options</li>
+          <li>A dedicated notifications screen</li>
+          <li>Sleep and HRV history tracking</li>
+          <li>Smarter exercise search that understands alternate names</li>
+        </ul>
       </div>
       <div class="content-row">
-        <h3>How do I send feedback or report a bug?</h3>
-        <p>Email us anytime — we read every message and use it to shape what we build next.</p>
-        <a class="btn" style="margin-top:0.6rem;" href="mailto:rep.app.dev@gmail.com?subject=Rep%20Feedback">
-          Send feedback ↗
-        </a>
+        <p class="sub-heading">Fixed</p>
+        <p>Various bug fixes and stability improvements ahead of launch.</p>
       </div>
     </div>
 
@@ -331,10 +298,10 @@
     <div class="card" style="margin-top:2rem;margin-bottom:0;">
       <div class="contact-row">
         <div class="contact-row-left">
-          <strong>Still have a question?</strong>
+          <strong>Have feedback on a release?</strong>
           <p>We'll get back to you as soon as we can.</p>
         </div>
-        <a class="btn" href="mailto:rep.app.dev@gmail.com?subject=Rep%20FAQ%20Question">
+        <a class="btn" href="mailto:rep.app.dev@gmail.com?subject=Rep%20Changelog%20Feedback">
           Email us ↗
         </a>
       </div>
