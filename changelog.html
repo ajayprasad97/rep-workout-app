@@ -32,7 +32,7 @@
       --surface-muted: #F1E5CB;
       --text:          #3E2819;
       --text-sub:      #735440;
-      --text-muted:    #7E6249;
+      --text-muted:    #7A5D44;
       --text-on-accent:#FFFFFF;
       --border:        #DFD0B4;
       --divider:       rgba(62,40,25,0.09);
@@ -265,6 +265,9 @@
     @media (prefers-reduced-motion: reduce) {
       @view-transition { navigation: none; }
     }
+  
+    /* Keyboard focus ring (mouse clicks don't trigger :focus-visible) */
+    :where(a, button, summary, input, select, textarea, [tabindex]):focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
   </style>
 </head>
 <body>
