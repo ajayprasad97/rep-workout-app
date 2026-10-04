@@ -1,0 +1,4 @@
+<!-- Google Play logo (brand mark; Lucide ships no brand icons). Filled, not stroked. -->
+<svg viewBox="0 0 24 24" fill="currentColor" stroke="none">
+  <path d="M3.609 1.814 13.792 12 3.609 22.186a1.5 1.5 0 0 1-.609-1.207V3.021a1.5 1.5 0 0 1 .609-1.207zm10.831 10.83 2.36-2.36 4.28 2.44a1.5 1.5 0 0 1 0 2.552l-4.28 2.44-2.36-2.36-1.828-1.826zm-1.06-1.061L5.316 3.516l9.649 5.507-1.86 1.86zm0 1.968 1.86 1.86-9.649 5.507 7.789-8.157v-.03z"/>
+</svg>

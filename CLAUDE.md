@@ -44,4 +44,7 @@ the [Lucide](https://lucide.dev/icons) icon NAME (1em square, `currentColor`,
   shared invites.
 - `top.html`'s Top 10 list is refreshed periodically. Use `data-icon` SVGs for
   any new card icons and run `npm run build` before committing.
+- The homepage QR code (desktop only) encodes `https://repworkout.app/get`. `get/index.html`
+  redirects iPhone/iPad to the App Store and Android to Google Play, and shows both
+  buttons to everyone else. Keep that URL stable: printed or screenshotted codes depend on it.
 - Store buttons follow the contract in `assets/store-links.js` (`data-store-*`).
