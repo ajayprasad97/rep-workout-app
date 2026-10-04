@@ -1,0 +1,72 @@
+<!-- Generated from partials/info-chrome-css.html by scripts/build.mjs. Edit the partial, not this copy. -->
+<style>
+  /* Shared header, mobile menu, footer and icon styles for the info pages. */
+  header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 0 5%;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    position: relative;
+    z-index: 10;
+  }
+  .header-logo { display: flex; align-items: center; gap: 0.5rem; text-decoration: none; flex-shrink: 0; }
+  .header-title { font-size: 0.95rem; font-weight: 600; color: var(--text); }
+  .site-nav { display: flex; align-items: center; gap: 0.15rem; }
+  .site-nav-link { padding: 6px 11px; border-radius: 6px; font-size: 0.85rem; font-weight: 500; color: var(--text-sub); text-decoration: none; transition: color 0.2s, background 0.2s; white-space: nowrap; }
+  .site-nav-link:hover, .site-nav-link[aria-current="page"] { color: var(--text); background: var(--surface-muted); }
+  .btn-join { display: inline-flex; align-items: center; gap: 0.4rem; margin-left: 0.5rem; padding: 7px 18px; border-radius: 50px; background: var(--accent); color: var(--accent-fg); font-size: 0.82rem; font-weight: 600; text-decoration: none; white-space: nowrap; transition: opacity 0.2s; }
+  .btn-join:hover { opacity: 0.85; }
+  .menu-btn {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    padding: 6px;
+    margin: -6px;
+    color: var(--text);
+    cursor: pointer;
+    line-height: 0;
+    flex-shrink: 0;
+  }
+  .menu-btn .menu-icon-close, .menu-btn[aria-expanded="true"] .menu-icon-open { display: none; }
+  .menu-btn[aria-expanded="true"] .menu-icon-close { display: block; }
+  @media (max-width: 680px) {
+    .menu-btn { display: flex; }
+    .site-nav {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      z-index: 50;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0.15rem;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 0.6rem 5% 1rem;
+      box-shadow: 0 8px 20px rgba(62,40,25,0.1);
+    }
+    .site-nav.open { display: flex; }
+    .site-nav-link { padding: 10px 12px; }
+    .btn-join { margin: 0.4rem 0 0.2rem; align-self: flex-start; }
+  }
+
+  footer {
+    border-top: 1px solid var(--border);
+    background: var(--surface);
+    padding: 1rem 1.25rem;
+    text-align: center;
+    font-size: 0.78rem;
+    color: var(--text-muted);
+  }
+  footer a { color: var(--accent-text); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+
+  .icon { display: inline-block; vertical-align: -0.125em; flex-shrink: 0; }
+</style>

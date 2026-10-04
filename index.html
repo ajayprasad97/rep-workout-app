@@ -45,7 +45,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" integrity="sha512-dPXYcDub/aeb08c63jRq/k6GaKccl256JQy/AnOq7CAnEZ9FzSL9wSbcZkMp4R26vBsMLFYH4kQ67/bbV8XaCQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -258,7 +257,7 @@
       padding: 1rem;
       padding-top: 3rem;
     }
-    .phone-placeholder i { font-size: 2.2rem; opacity: 0.35; }
+    .phone-placeholder .icon { font-size: 2.2rem; opacity: 0.35; }
     .phone-placeholder span { opacity: 0.6; line-height: 1.4; }
 
     /* ── Hero ── */
@@ -383,7 +382,7 @@
       padding: 0 2rem;
       flex-shrink: 0;
     }
-    .strip-item i { color: var(--accent); font-size: 0.95rem; }
+    .strip-item .icon { color: var(--accent); font-size: 0.95rem; }
     @keyframes strip-scroll {
       0%   { transform: translateX(0); }
       100% { transform: translateX(-50%); }
@@ -715,36 +714,46 @@
   
     /* Keyboard focus ring (mouse clicks don't trigger :focus-visible) */
     :where(a, button, summary, input, select, textarea, [tabindex]):focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+  
+    /* ── Icons (inline Lucide SVGs, filled in by scripts/build.mjs) ── */
+    .icon { display: inline-block; vertical-align: -0.125em; flex-shrink: 0; }
+    #menu-btn .icon { display: block; }
+    #menu-btn .menu-icon-close, #menu-btn[aria-expanded="true"] .menu-icon-open { display: none; }
+    #menu-btn[aria-expanded="true"] .menu-icon-close { display: block; }
   </style>
 </head>
 
 <body>
 
 <!-- ═══════════════════════════════════════ HEADER ═══ -->
+<!-- partial:landing-header -->
+<!-- Generated from partials/landing-header.html by scripts/build.mjs. Edit the partial, not this copy. -->
 <header id="site-header">
-  <a href="." class="header-logo">
-    <img class="logo-img" src="assets/icon.png" alt="" />
+  <a href="/" class="header-logo">
+    <img class="logo-img" src="/assets/icon.png" alt="" />
     <span class="logo-name">Rep</span>
   </a>
 
   <div class="collapsible-header" id="nav-collapse">
     <nav>
-      <a class="nav-link" href="#features">Features</a>
-      <a class="nav-link" href="top.html">Top Exercises</a>
-      <a class="nav-link" href="faq.html">FAQ</a>
-      <a class="nav-link" href="privacy.html">Privacy</a>
+      <a class="nav-link" data-nav="features" href="/#features">Features</a>
+      <a class="nav-link" data-nav="top" href="/top.html">Top Exercises</a>
+      <a class="nav-link" data-nav="faq" href="/faq.html">FAQ</a>
+      <a class="nav-link" data-nav="privacy" href="/privacy.html">Privacy</a>
     </nav>
     <div class="header-actions">
       <a class="btn btn-primary btn-pill" data-store-primary data-store-short href="https://apps.apple.com/us/app/rep-the-workout-app/id6765540272" target="_blank" rel="noopener noreferrer">
-        <span data-store-icon><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg></span> Download
+        <span data-store-icon><svg class="icon" data-icon="apple" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" stroke="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg></span> Download
       </a>
     </div>
   </div>
 
   <button id="menu-btn" onclick="toggleNav()" aria-label="Open menu" aria-expanded="false" aria-controls="nav-collapse">
-    <i class="bi bi-list" id="menu-icon" aria-hidden="true"></i>
+    <svg class="icon menu-icon-open" data-icon="menu" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16" /><path d="M4 12h16" /><path d="M4 19h16" /></svg>
+    <svg class="icon menu-icon-close" data-icon="x" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg>
   </button>
 </header>
+<!-- /partial:landing-header -->
 
 <main>
 
@@ -753,7 +762,7 @@
   <div id="hero-gradient-mount"></div>
 
   <div class="hero-eyebrow reveal-up">
-    <i class="bi bi-apple"></i> Now available on the App Store &amp; Google Play
+    <svg class="icon" data-icon="apple" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="currentColor" stroke="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg> Now available on the App Store &amp; Google Play
   </div>
 
   <h1 class="hero-title gradient-text reveal-up">
@@ -789,19 +798,19 @@
 <!-- ═══════════════════════════════════════ STRIP ═══ -->
 <section id="strip" aria-hidden="true">
   <div class="strip-track">
-    <span class="strip-item"><i class="bi bi-lightning-charge-fill"></i> Smart workout splits</span>
-    <span class="strip-item"><i class="bi bi-bar-chart-fill"></i> Progress tracking</span>
-    <span class="strip-item"><i class="bi bi-heart-pulse-fill"></i> Recovery insights</span>
-    <span class="strip-item"><i class="bi bi-people-fill"></i> Social feed</span>
-    <span class="strip-item"><i class="bi bi-apple"></i> Apple Health sync</span>
-    <span class="strip-item"><i class="bi bi-shield-check-fill"></i> Privacy first</span>
+    <span class="strip-item"><svg class="icon" data-icon="zap" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15.914 4a1.5 1.5 0 00-2.474-1.561l-9 9A1.5 1.5 0 005.5 14h4.002a.5.5 0 01.471.666L8.086 20a1.5 1.5 0 002.475 1.56l9-9A1.5 1.5 0 0018.5 10h-3.997a.5.5 0 01-.472-.667z" /></svg> Smart workout splits</span>
+    <span class="strip-item"><svg class="icon" data-icon="chart-column" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v16a2 2 0 0 0 2 2h16" /><path d="M18 17V9" /><path d="M13 17V5" /><path d="M8 17v-3" /></svg> Progress tracking</span>
+    <span class="strip-item"><svg class="icon" data-icon="heart-pulse" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5" /><path d="M3.22 13H9.5l.5-1 2 4.5 2-7 1.5 3.5h5.27" /></svg> Recovery insights</span>
+    <span class="strip-item"><svg class="icon" data-icon="users" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /><path d="M16 3.128a4 4 0 0 1 0 7.744" /><path d="M22 21v-2a4 4 0 0 0-3-3.87" /><circle cx="9" cy="7" r="4" /></svg> Social feed</span>
+    <span class="strip-item"><svg class="icon" data-icon="apple" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="currentColor" stroke="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg> Apple Health sync</span>
+    <span class="strip-item"><svg class="icon" data-icon="shield-check" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" /><path d="m9 12 2 2 4-4" /></svg> Privacy first</span>
     <!-- duplicate for seamless loop -->
-    <span class="strip-item"><i class="bi bi-lightning-charge-fill"></i> Smart workout splits</span>
-    <span class="strip-item"><i class="bi bi-bar-chart-fill"></i> Progress tracking</span>
-    <span class="strip-item"><i class="bi bi-heart-pulse-fill"></i> Recovery insights</span>
-    <span class="strip-item"><i class="bi bi-people-fill"></i> Social feed</span>
-    <span class="strip-item"><i class="bi bi-apple"></i> Apple Health sync</span>
-    <span class="strip-item"><i class="bi bi-shield-check-fill"></i> Privacy first</span>
+    <span class="strip-item"><svg class="icon" data-icon="zap" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15.914 4a1.5 1.5 0 00-2.474-1.561l-9 9A1.5 1.5 0 005.5 14h4.002a.5.5 0 01.471.666L8.086 20a1.5 1.5 0 002.475 1.56l9-9A1.5 1.5 0 0018.5 10h-3.997a.5.5 0 01-.472-.667z" /></svg> Smart workout splits</span>
+    <span class="strip-item"><svg class="icon" data-icon="chart-column" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v16a2 2 0 0 0 2 2h16" /><path d="M18 17V9" /><path d="M13 17V5" /><path d="M8 17v-3" /></svg> Progress tracking</span>
+    <span class="strip-item"><svg class="icon" data-icon="heart-pulse" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5" /><path d="M3.22 13H9.5l.5-1 2 4.5 2-7 1.5 3.5h5.27" /></svg> Recovery insights</span>
+    <span class="strip-item"><svg class="icon" data-icon="users" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /><path d="M16 3.128a4 4 0 0 1 0 7.744" /><path d="M22 21v-2a4 4 0 0 0-3-3.87" /><circle cx="9" cy="7" r="4" /></svg> Social feed</span>
+    <span class="strip-item"><svg class="icon" data-icon="apple" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="currentColor" stroke="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg> Apple Health sync</span>
+    <span class="strip-item"><svg class="icon" data-icon="shield-check" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" /><path d="m9 12 2 2 4-4" /></svg> Privacy first</span>
   </div>
 </section>
 
@@ -818,7 +827,7 @@
     <div class="features-list">
 
       <div class="feat-item reveal-up">
-        <div class="feat-icon"><i class="bi bi-cpu-fill"></i></div>
+        <div class="feat-icon"><svg class="icon" data-icon="brain-circuit" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z" /><path d="M9 13a4.5 4.5 0 0 0 3-4" /><path d="M6.003 5.125A3 3 0 0 0 6.401 6.5" /><path d="M3.477 10.896a4 4 0 0 1 .585-.396" /><path d="M6 18a4 4 0 0 1-1.967-.516" /><path d="M12 13h4" /><path d="M12 18h6a2 2 0 0 1 2 2v1" /><path d="M12 8h8" /><path d="M16 8V5a2 2 0 0 1 2-2" /><circle cx="16" cy="13" r=".5" /><circle cx="18" cy="3" r=".5" /><circle cx="20" cy="21" r=".5" /><circle cx="20" cy="8" r=".5" /></svg></div>
         <div class="feat-text">
           <h3>Science-based workout planning</h3>
           <p>Tell Rep your goals, equipment, and schedule. It builds a periodised program — Push/Pull/Legs, Upper/Lower, or Full Body — using established sports science principles, with auto-scheduled deload weeks so you never overtrain.</p>
@@ -826,7 +835,7 @@
       </div>
 
       <div class="feat-item reveal-up">
-        <div class="feat-icon"><i class="bi bi-clipboard2-check-fill"></i></div>
+        <div class="feat-icon"><svg class="icon" data-icon="list-checks" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 5h8" /><path d="M13 12h8" /><path d="M13 19h8" /><path d="m3 17 2 2 4-4" /><path d="m3 7 2 2 4-4" /></svg></div>
         <div class="feat-text">
           <h3>Track every set, rep & weight</h3>
           <p>Log exercises with RPE, warmup flags, and rest timers. Full history means Rep always knows your last working weight and suggests the right progression.</p>
@@ -834,7 +843,7 @@
       </div>
 
       <div class="feat-item reveal-up">
-        <div class="feat-icon"><i class="bi bi-heart-pulse-fill"></i></div>
+        <div class="feat-icon"><svg class="icon" data-icon="heart-pulse" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5" /><path d="M3.22 13H9.5l.5-1 2 4.5 2-7 1.5 3.5h5.27" /></svg></div>
         <div class="feat-text">
           <h3>Recovery & readiness score</h3>
           <p>Rep reads sleep, resting heart rate, and body weight from Apple Health or Google Health Connect — entirely on-device — and flags when to push hard or back off.</p>
@@ -842,7 +851,7 @@
       </div>
 
       <div class="feat-item reveal-up">
-        <div class="feat-icon"><i class="bi bi-fire"></i></div>
+        <div class="feat-icon"><svg class="icon" data-icon="flame" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3q1 4 4 6.5t3 5.5a1 1 0 0 1-14 0 5 5 0 0 1 1-3 1 1 0 0 0 5 0c0-2-1.5-3-1.5-5q0-2 2.5-4" /></svg></div>
         <div class="feat-text">
           <h3>Honest calorie tracking</h3>
           <p>Active calories from your wearable via Apple Health or Health Connect. No wearable? A MET-based estimate keeps things sensible. Stored locally — never uploaded.</p>
@@ -874,7 +883,7 @@
   <div class="cards-grid">
 
     <div class="feat-card reveal-up">
-      <span class="card-icon-wrap"><i class="bi bi-graph-up-arrow"></i></span>
+      <span class="card-icon-wrap"><svg class="icon" data-icon="trending-up" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 7h6v6" /><path d="m22 7-8.5 8.5-5-5L2 17" /></svg></span>
       <div class="card-body">
         <h3>Progressive overload</h3>
         <p>Rep suggests weight increases based on your actual history. No guesswork — smart defaults you can override any time.</p>
@@ -882,7 +891,7 @@
     </div>
 
     <div class="feat-card reveal-up">
-      <span class="card-icon-wrap"><i class="bi bi-calendar3"></i></span>
+      <span class="card-icon-wrap"><svg class="icon" data-icon="calendar-sync" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 10v4h4" /><path d="m11 14 1.535-1.605a5 5 0 018 1.5" /><path d="M16 2v3" /><path d="m21 18-1.535 1.605a5 5 0 01-8-1.5" /><path d="M21 22v-4h-4" /><path d="M21 8.517V5a2 2 0 00-2-2H5a2 2 0 00-2 2v14a2 2 0 002 2h3.517" /><path d="M3 9h4" /><path d="M8 2v3" /></svg></span>
       <div class="card-body">
         <h3>Auto-deload weeks</h3>
         <p>After 3–4 weeks of training, Rep automatically schedules a lighter deload week and cycles your split to keep you progressing.</p>
@@ -890,7 +899,7 @@
     </div>
 
     <div class="feat-card reveal-up">
-      <span class="card-icon-wrap"><i class="bi bi-shield-lock-fill"></i></span>
+      <span class="card-icon-wrap"><svg class="icon" data-icon="lock-keyhole" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="16" r="1" /><rect x="3" y="10" width="18" height="12" rx="2" /><path d="M7 10V7a5 5 0 0 1 10 0v3" /></svg></span>
       <div class="card-body">
         <h3>Privacy first</h3>
         <p>Your workout data lives on your device. Health data (sleep, HRV, body weight) is never uploaded anywhere. You control what syncs.</p>
@@ -898,7 +907,7 @@
     </div>
 
     <div class="feat-card reveal-up">
-      <span class="card-icon-wrap"><i class="bi bi-palette-fill"></i></span>
+      <span class="card-icon-wrap"><svg class="icon" data-icon="palette" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22a1 1 0 0 1 0-20 10 9 0 0 1 10 9 5 5 0 0 1-5 5h-2.25a1.75 1.75 0 0 0-1.4 2.8l.3.4a1.75 1.75 0 0 1-1.4 2.8z" /><circle cx="13.5" cy="6.5" r=".5" fill="currentColor" /><circle cx="17.5" cy="10.5" r=".5" fill="currentColor" /><circle cx="6.5" cy="12.5" r=".5" fill="currentColor" /><circle cx="8.5" cy="7.5" r=".5" fill="currentColor" /></svg></span>
       <div class="card-body">
         <h3>6 beautiful themes</h3>
         <p>Midnight Indigo, Forest Noir, Crimson Ember, Cream Sage, Fog & Slate, and Sand & Clay. Match your vibe.</p>
@@ -906,7 +915,7 @@
     </div>
 
     <div class="feat-card reveal-up">
-      <span class="card-icon-wrap"><i class="bi bi-cloud-slash-fill"></i></span>
+      <span class="card-icon-wrap"><svg class="icon" data-icon="wifi-off" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h.01" /><path d="M8.5 16.429a5 5 0 0 1 7 0" /><path d="M5 12.859a10 10 0 0 1 5.17-2.69" /><path d="M19 12.859a10 10 0 0 0-2.007-1.523" /><path d="M2 8.82a15 15 0 0 1 4.177-2.643" /><path d="M22 8.82a15 15 0 0 0-11.288-3.764" /><path d="m2 2 20 20" /></svg></span>
       <div class="card-body">
         <h3>Fully offline</h3>
         <p>Everything works without internet. Your data lives in a local database on your device and syncs to the cloud when you're back online.</p>
@@ -914,7 +923,7 @@
     </div>
 
     <div class="feat-card reveal-up">
-      <span class="card-icon-wrap"><i class="bi bi-people-fill"></i></span>
+      <span class="card-icon-wrap"><svg class="icon" data-icon="users" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /><path d="M16 3.128a4 4 0 0 1 0 7.744" /><path d="M22 21v-2a4 4 0 0 0-3-3.87" /><circle cx="9" cy="7" r="4" /></svg></span>
       <div class="card-body">
         <h3>Social feed</h3>
         <p>Share workouts, follow other athletes, and stay accountable together. See what your friends are lifting in real time.</p>
@@ -953,14 +962,14 @@
         </tr>
         <tr>
           <td>Social feed</td>
-          <td class="compare-highlight"><i class="bi bi-check-lg compare-check"></i></td>
-          <td><i class="bi bi-check-lg compare-check"></i></td>
+          <td class="compare-highlight"><svg class="icon compare-check" data-icon="check" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg></td>
+          <td><svg class="icon compare-check" data-icon="check" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg></td>
           <td><span class="compare-dash">—</span></td>
           <td><span class="compare-dash">—</span></td>
         </tr>
         <tr>
           <td>Recovery insights from your wearable (sleep, HRV)</td>
-          <td class="compare-highlight"><i class="bi bi-check-lg compare-check"></i></td>
+          <td class="compare-highlight"><svg class="icon compare-check" data-icon="check" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg></td>
           <td><span class="compare-dash">—</span></td>
           <td><span class="compare-dash">—</span></td>
           <td>Estimated from logged sets only</td>
@@ -1010,10 +1019,12 @@
 </main>
 
 <!-- ═══════════════════════════════════════ FOOTER ═══ -->
+<!-- partial:landing-footer -->
+<!-- Generated from partials/landing-footer.html by scripts/build.mjs. Edit the partial, not this copy. -->
 <footer>
   <div class="footer-brand">
     <div class="footer-brand-logo">
-      <img class="logo-img" src="assets/icon.png" alt="" style="width:40px;height:40px;border-radius:10px;" />
+      <img class="logo-img" src="/assets/icon.png" alt="" style="width:40px;height:40px;border-radius:10px;" />
       <span class="logo-name">Rep</span>
     </div>
     <p class="footer-tagline">The workout tracker<br>that adapts to you.</p>
@@ -1023,16 +1034,17 @@
     <h4>Get the app</h4>
     <a href="https://apps.apple.com/us/app/rep-the-workout-app/id6765540272" target="_blank" rel="noopener noreferrer">Download on the App Store</a>
     <a href="https://play.google.com/store/apps/details?id=com.reptheworkout.app&hl=en_US" target="_blank" rel="noopener noreferrer">Get it on Google Play</a>
-    <a href="invite/">Invite a Friend</a>
+    <a href="/invite/">Invite a Friend</a>
   </div>
 
   <div class="footer-col">
     <h4>Legal &amp; Support</h4>
-    <a href="privacy.html">Privacy Policy</a>
-    <a href="tos.html">Terms of Service</a>
-    <a href="community-guidelines.html">Community Guidelines</a>
-    <a href="faq.html">FAQ</a>
-    <a href="delete-account.html">Delete Account</a>
+    <a href="/privacy.html">Privacy Policy</a>
+    <a href="/tos.html">Terms of Service</a>
+    <a href="/community-guidelines.html">Community Guidelines</a>
+    <a href="/faq.html">FAQ</a>
+    <a href="/changelog.html">What's New</a>
+    <a href="/delete-account.html">Delete Account</a>
     <a href="mailto:rep.app.dev@gmail.com">Contact</a>
   </div>
 
@@ -1040,6 +1052,7 @@
     &copy; 2026 Rep — The Workout App &nbsp;·&nbsp; Questions? <a href="mailto:rep.app.dev@gmail.com" style="color:var(--accent-text);">rep.app.dev@gmail.com</a>
   </p>
 </footer>
+<!-- /partial:landing-footer -->
 
 
 <!-- GSAP -->
@@ -1056,13 +1069,11 @@
 
   // ── Mobile nav ──
   const navCollapse = document.getElementById('nav-collapse');
-  const menuIcon = document.getElementById('menu-icon');
   let navOpen = false;
 
   function toggleNav() {
     navOpen = !navOpen;
     navCollapse.classList.toggle('open', navOpen);
-    menuIcon.className = navOpen ? 'bi bi-x' : 'bi bi-list';
     const btn = document.getElementById('menu-btn');
     btn.setAttribute('aria-expanded', String(navOpen));
     btn.setAttribute('aria-label', navOpen ? 'Close menu' : 'Open menu');

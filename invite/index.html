@@ -51,24 +51,6 @@
       flex-direction: column;
     }
 
-    header {
-      background: var(--surface);
-      border-bottom: 1px solid var(--border);
-      padding: 0 5%;
-      height: 56px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-    }
-    .header-logo { display: flex; align-items: center; gap: 0.5rem; text-decoration: none; flex-shrink: 0; }
-    .header-title { font-size: 0.95rem; font-weight: 600; color: var(--text); }
-    .site-nav { display: flex; align-items: center; gap: 0.15rem; }
-    .site-nav-link { padding: 6px 11px; border-radius: 6px; font-size: 0.85rem; font-weight: 500; color: var(--text-sub); text-decoration: none; transition: color 0.2s, background 0.2s; white-space: nowrap; }
-    .site-nav-link:hover { color: var(--text); background: var(--surface-muted); }
-    .btn-join { margin-left: 0.5rem; padding: 7px 18px; border-radius: 50px; background: var(--accent); color: var(--accent-fg); font-size: 0.82rem; font-weight: 600; text-decoration: none; white-space: nowrap; transition: opacity 0.2s; }
-    .btn-join:hover { opacity: 0.85; }
-
     main {
       flex: 1;
       max-width: 480px;
@@ -153,17 +135,6 @@
     .store-secondary-row a { color: var(--text-sub); text-decoration: underline; text-underline-offset: 2px; }
     .store-secondary-row a:hover { color: var(--accent); }
 
-    footer {
-      border-top: 1px solid var(--border);
-      background: var(--surface);
-      padding: 1rem 1.25rem;
-      text-align: center;
-      font-size: 0.78rem;
-      color: var(--text-muted);
-    }
-    footer a { color: var(--accent-text); text-decoration: none; }
-    footer a:hover { text-decoration: underline; }
-
     @media (max-width: 480px) {
       main { padding: 2rem 1rem 2.5rem; }
       .hero h1 { font-size: 1.5rem; }
@@ -188,20 +159,105 @@
     /* Keyboard focus ring (mouse clicks don't trigger :focus-visible) */
     :where(a, button, summary, input, select, textarea, [tabindex]):focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
   </style>
+  <!-- partial:info-chrome-css -->
+<!-- Generated from partials/info-chrome-css.html by scripts/build.mjs. Edit the partial, not this copy. -->
+<style>
+  /* Shared header, mobile menu, footer and icon styles for the info pages. */
+  header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 0 5%;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    position: relative;
+    z-index: 10;
+  }
+  .header-logo { display: flex; align-items: center; gap: 0.5rem; text-decoration: none; flex-shrink: 0; }
+  .header-title { font-size: 0.95rem; font-weight: 600; color: var(--text); }
+  .site-nav { display: flex; align-items: center; gap: 0.15rem; }
+  .site-nav-link { padding: 6px 11px; border-radius: 6px; font-size: 0.85rem; font-weight: 500; color: var(--text-sub); text-decoration: none; transition: color 0.2s, background 0.2s; white-space: nowrap; }
+  .site-nav-link:hover, .site-nav-link[aria-current="page"] { color: var(--text); background: var(--surface-muted); }
+  .btn-join { display: inline-flex; align-items: center; gap: 0.4rem; margin-left: 0.5rem; padding: 7px 18px; border-radius: 50px; background: var(--accent); color: var(--accent-fg); font-size: 0.82rem; font-weight: 600; text-decoration: none; white-space: nowrap; transition: opacity 0.2s; }
+  .btn-join:hover { opacity: 0.85; }
+  .menu-btn {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    padding: 6px;
+    margin: -6px;
+    color: var(--text);
+    cursor: pointer;
+    line-height: 0;
+    flex-shrink: 0;
+  }
+  .menu-btn .menu-icon-close, .menu-btn[aria-expanded="true"] .menu-icon-open { display: none; }
+  .menu-btn[aria-expanded="true"] .menu-icon-close { display: block; }
+  @media (max-width: 680px) {
+    .menu-btn { display: flex; }
+    .site-nav {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      z-index: 50;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0.15rem;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 0.6rem 5% 1rem;
+      box-shadow: 0 8px 20px rgba(62,40,25,0.1);
+    }
+    .site-nav.open { display: flex; }
+    .site-nav-link { padding: 10px 12px; }
+    .btn-join { margin: 0.4rem 0 0.2rem; align-self: flex-start; }
+  }
+
+  footer {
+    border-top: 1px solid var(--border);
+    background: var(--surface);
+    padding: 1rem 1.25rem;
+    text-align: center;
+    font-size: 0.78rem;
+    color: var(--text-muted);
+  }
+  footer a { color: var(--accent-text); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+
+  .icon { display: inline-block; vertical-align: -0.125em; flex-shrink: 0; }
+</style>
+<!-- /partial:info-chrome-css -->
 </head>
 <body>
 
-  <header>
-    <a href="/" class="header-logo">
-      <img src="../assets/icon.png" alt="" style="width:32px;height:32px;border-radius:8px;display:block;" />
-      <span class="header-title">Rep</span>
+  <!-- partial:info-header -->
+<!-- Generated from partials/info-header.html by scripts/build.mjs. Edit the partial, not this copy. -->
+<header>
+  <a href="/" class="header-logo">
+    <img src="/assets/icon.png" alt="" width="32" height="32" style="border-radius:8px;display:block;" />
+    <span class="header-title">Rep</span>
+  </a>
+  <button id="menu-btn" class="menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="site-nav">
+    <svg class="icon menu-icon-open" data-icon="menu" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16" /><path d="M4 12h16" /><path d="M4 19h16" /></svg>
+    <svg class="icon menu-icon-close" data-icon="x" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg>
+  </button>
+  <nav class="site-nav" id="site-nav">
+    <a href="/#features" class="site-nav-link" data-nav="features">Features</a>
+    <a href="/top.html" class="site-nav-link" data-nav="top">Top Exercises</a>
+    <a href="/faq.html" class="site-nav-link" data-nav="faq">FAQ</a>
+    <a href="/privacy.html" class="site-nav-link" data-nav="privacy">Privacy</a>
+    <a class="btn-join" data-store-primary data-store-short href="https://apps.apple.com/us/app/rep-the-workout-app/id6765540272" target="_blank" rel="noopener noreferrer">
+      <span data-store-icon><svg class="icon" data-icon="apple" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14" fill="currentColor" stroke="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg></span> Download
     </a>
-    <nav class="site-nav">
-      <a href="/#features" class="site-nav-link">Features</a>
-      <a href="/faq.html" class="site-nav-link">FAQ</a>
-      <a href="/privacy.html" class="site-nav-link">Privacy</a>
-    </nav>
-  </header>
+  </nav>
+</header>
+<!-- /partial:info-header -->
 
   <main>
     <div class="hero">
@@ -228,14 +284,21 @@
     </div>
   </main>
 
-  <footer>
-    Rep — The Workout App &nbsp;·&nbsp;
-    <a href="/">Home</a> &nbsp;·&nbsp;
-    <a href="/privacy.html">Privacy Policy</a> &nbsp;·&nbsp;
-    <a href="/tos.html">Terms of Service</a> &nbsp;·&nbsp;
-    <a href="/community-guidelines.html">Community Guidelines</a> &nbsp;·&nbsp;
-    <a href="mailto:rep.app.dev@gmail.com">rep.app.dev@gmail.com</a>
-  </footer>
+  <!-- partial:info-footer -->
+<!-- Generated from partials/info-footer.html by scripts/build.mjs. Edit the partial, not this copy. -->
+<footer>
+  Rep — The Workout App &nbsp;·&nbsp;
+  <a href="/">Home</a> &nbsp;·&nbsp;
+  <a href="/top.html">Top Exercises</a> &nbsp;·&nbsp;
+  <a href="/faq.html">FAQ</a> &nbsp;·&nbsp;
+  <a href="/changelog.html">What's New</a> &nbsp;·&nbsp;
+  <a href="/privacy.html">Privacy Policy</a> &nbsp;·&nbsp;
+  <a href="/tos.html">Terms of Service</a> &nbsp;·&nbsp;
+  <a href="/community-guidelines.html">Community Guidelines</a> &nbsp;·&nbsp;
+  <a href="/delete-account.html">Delete Account</a> &nbsp;·&nbsp;
+  Questions? <a href="mailto:rep.app.dev@gmail.com">rep.app.dev@gmail.com</a>
+</footer>
+<!-- /partial:info-footer -->
 
   <script>
     (function () {
@@ -251,5 +314,6 @@
   </script>
   <script src="../assets/store-links.js"></script>
 
+<script src="/assets/site-nav.js"></script>
 </body>
 </html>
