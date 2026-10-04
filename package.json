@@ -1,0 +1,13 @@
+{
+  "name": "rep-website",
+  "private": true,
+  "description": "Static marketing site for Rep — The Workout App (repworkout.app). Served as-is by GitHub Pages; the build only rewrites the committed HTML in place.",
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "check": "node scripts/build.mjs --check"
+  },
+  "devDependencies": {
+    "lucide-static": "1.51.0"
+  }
+}

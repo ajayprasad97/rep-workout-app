@@ -1,0 +1,20 @@
+name: Check site build
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      # Fails if a page's shared header/footer or icons don't match
+      # partials/ and the icon set. Fix with `npm run build` and commit.
+      - run: npm run check

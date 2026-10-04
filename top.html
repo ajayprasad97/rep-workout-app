@@ -27,7 +27,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" integrity="sha512-dPXYcDub/aeb08c63jRq/k6GaKccl256JQy/AnOq7CAnEZ9FzSL9wSbcZkMp4R26vBsMLFYH4kQ67/bbV8XaCQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -39,7 +38,7 @@
       --surface-muted: #F1E5CB;
       --text:          #3E2819;
       --text-sub:      #735440;
-      --text-muted:    #7E6249;
+      --text-muted:    #7A5D44;
       --border:        #DFD0B4;
       --divider:       rgba(62,40,25,0.09);
       --accent:        #AD5936;
@@ -135,7 +134,7 @@
       color: var(--text-sub); text-decoration: none;
       transition: color 0.2s, background 0.2s; white-space: nowrap;
     }
-    .nav-link:hover, .nav-link.active { color: var(--text); background: var(--surface-muted); }
+    .nav-link:hover, .nav-link[aria-current="page"] { color: var(--text); background: var(--surface-muted); }
     .header-actions { display: flex; align-items: center; gap: 0.75rem; flex-shrink: 0; }
 
     #menu-btn {
@@ -436,6 +435,15 @@
       }
       @view-transition { navigation: none; }
     }
+  
+    /* Keyboard focus ring (mouse clicks don't trigger :focus-visible) */
+    :where(a, button, summary, input, select, textarea, [tabindex]):focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+  
+    /* ── Icons (inline Lucide SVGs, filled in by scripts/build.mjs) ── */
+    .icon { display: inline-block; vertical-align: -0.125em; flex-shrink: 0; }
+    #menu-btn .icon { display: block; }
+    #menu-btn .menu-icon-close, #menu-btn[aria-expanded="true"] .menu-icon-open { display: none; }
+    #menu-btn[aria-expanded="true"] .menu-icon-close { display: block; }
   </style>
 
   <script type="application/ld+json">
@@ -495,31 +503,34 @@
 <body>
 
 <!-- ═══════════════════════════════════ HEADER ═══ -->
+<!-- partial:landing-header active=top -->
+<!-- Generated from partials/landing-header.html by scripts/build.mjs. Edit the partial, not this copy. -->
 <header id="site-header">
-  <a href="." class="header-logo">
-    <img class="logo-img" src="assets/icon.png" alt="" />
+  <a href="/" class="header-logo">
+    <img class="logo-img" src="/assets/icon.png" alt="" />
     <span class="logo-name">Rep</span>
   </a>
 
   <div class="collapsible-header" id="nav-collapse">
     <nav>
-      <a class="nav-link" href="index.html#features">Features</a>
-      <a class="nav-link active" href="top.html">Top Exercises</a>
-      <a class="nav-link" href="top.html#coach">AI Coach</a>
-      <a class="nav-link" href="faq.html">FAQ</a>
-      <a class="nav-link" href="privacy.html">Privacy</a>
+      <a class="nav-link" data-nav="features" href="/#features">Features</a>
+      <a class="nav-link" data-nav="top" aria-current="page" href="/top.html">Top Exercises</a>
+      <a class="nav-link" data-nav="faq" href="/faq.html">FAQ</a>
+      <a class="nav-link" data-nav="privacy" href="/privacy.html">Privacy</a>
     </nav>
     <div class="header-actions">
       <a class="btn btn-primary btn-pill" data-store-primary data-store-short href="https://apps.apple.com/us/app/rep-the-workout-app/id6765540272" target="_blank" rel="noopener noreferrer">
-        <span data-store-icon><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg></span> Download
+        <span data-store-icon><svg class="icon" data-icon="apple" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" stroke="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg></span> Download
       </a>
     </div>
   </div>
 
   <button id="menu-btn" onclick="toggleNav()" aria-label="Open menu" aria-expanded="false" aria-controls="nav-collapse">
-    <i class="bi bi-list" id="menu-icon" aria-hidden="true"></i>
+    <svg class="icon menu-icon-open" data-icon="menu" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16" /><path d="M4 12h16" /><path d="M4 19h16" /></svg>
+    <svg class="icon menu-icon-close" data-icon="x" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg>
   </button>
 </header>
+<!-- /partial:landing-header -->
 
 <main>
 
@@ -554,7 +565,7 @@
     <article class="exercise-card" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
       <meta itemprop="position" content="1" />
       <div class="ex-card-top">
-        <div class="ex-icon"><i class="bi bi-arrow-left-right"></i></div>
+        <div class="ex-icon"><svg class="icon" data-icon="arrow-left-right" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3 4 7l4 4" /><path d="M4 7h16" /><path d="m16 21 4-4-4-4" /><path d="M20 17H4" /></svg></div>
         <div class="ex-meta">
           <div class="ex-rank">#1 Most Popular</div>
           <div class="ex-name" itemprop="name">Pec Deck</div>
@@ -562,8 +573,8 @@
       </div>
       <p class="ex-desc">Sit with your back flat against the pad, forearms on the arms of the machine, and bring them together in front of your chest in a controlled arc. An isolation fly that hits the chest hard without any shoulder stabilization demands.</p>
       <div class="ex-tags">
-        <span class="tag tag-muscle"><i class="bi bi-bullseye"></i> Chest</span>
-        <span class="tag tag-equipment"><i class="bi bi-gear-fill"></i> Machine</span>
+        <span class="tag tag-muscle"><svg class="icon" data-icon="target" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><circle cx="12" cy="12" r="6" /><circle cx="12" cy="12" r="2" /></svg> Chest</span>
+        <span class="tag tag-equipment"><svg class="icon" data-icon="cog" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 10.27 7 3.34" /><path d="m11 13.73-4 6.93" /><path d="M12 22v-2" /><path d="M12 2v2" /><path d="M14 12h8" /><path d="m17 20.66-1-1.73" /><path d="m17 3.34-1 1.73" /><path d="M2 12h2" /><path d="m20.66 17-1.73-1" /><path d="m20.66 7-1.73 1" /><path d="m3.34 17 1.73-1" /><path d="m3.34 7 1.73 1" /><circle cx="12" cy="12" r="2" /><circle cx="12" cy="12" r="8" /></svg> Machine</span>
         <span class="tag tag-level">Beginner</span>
       </div>
     </article>
@@ -572,7 +583,7 @@
     <article class="exercise-card" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
       <meta itemprop="position" content="2" />
       <div class="ex-card-top">
-        <div class="ex-icon"><i class="bi bi-shield-fill"></i></div>
+        <div class="ex-icon"><svg class="icon" data-icon="shield" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" /></svg></div>
         <div class="ex-meta">
           <div class="ex-rank">#2 Most Popular</div>
           <div class="ex-name" itemprop="name">Barbell Bench Press</div>
@@ -580,9 +591,9 @@
       </div>
       <p class="ex-desc">Unrack the barbell, lower it to your chest under control, then press back to lockout. The foundational upper-body push movement for chest, shoulder, and triceps strength — a gym staple for good reason.</p>
       <div class="ex-tags">
-        <span class="tag tag-muscle"><i class="bi bi-bullseye"></i> Chest</span>
-        <span class="tag tag-muscle"><i class="bi bi-circle"></i> Triceps · Shoulders</span>
-        <span class="tag tag-equipment"><i class="bi bi-dash-lg"></i> Barbell</span>
+        <span class="tag tag-muscle"><svg class="icon" data-icon="target" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><circle cx="12" cy="12" r="6" /><circle cx="12" cy="12" r="2" /></svg> Chest</span>
+        <span class="tag tag-muscle"><svg class="icon" data-icon="circle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /></svg> Triceps · Shoulders</span>
+        <span class="tag tag-equipment"><svg class="icon" data-icon="minus" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14" /></svg> Barbell</span>
         <span class="tag tag-level">Beginner</span>
       </div>
     </article>
@@ -591,7 +602,7 @@
     <article class="exercise-card" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
       <meta itemprop="position" content="3" />
       <div class="ex-card-top">
-        <div class="ex-icon"><i class="bi bi-arrow-down-circle-fill"></i></div>
+        <div class="ex-icon"><svg class="icon" data-icon="circle-arrow-down" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 8v8" /><path d="m8 12 4 4 4-4" /></svg></div>
         <div class="ex-meta">
           <div class="ex-rank">#3 Most Popular</div>
           <div class="ex-name" itemprop="name">Lat Pulldown</div>
@@ -599,9 +610,9 @@
       </div>
       <p class="ex-desc">Grip the bar wide, lean back slightly, and pull it down to your upper chest while driving your elbows toward your hips. A cable-based vertical pull that builds lat width and back strength without needing a pull-up bar.</p>
       <div class="ex-tags">
-        <span class="tag tag-muscle"><i class="bi bi-bullseye"></i> Back</span>
-        <span class="tag tag-muscle"><i class="bi bi-circle"></i> Biceps</span>
-        <span class="tag tag-equipment"><i class="bi bi-bezier2"></i> Cable</span>
+        <span class="tag tag-muscle"><svg class="icon" data-icon="target" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><circle cx="12" cy="12" r="6" /><circle cx="12" cy="12" r="2" /></svg> Back</span>
+        <span class="tag tag-muscle"><svg class="icon" data-icon="circle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /></svg> Biceps</span>
+        <span class="tag tag-equipment"><svg class="icon" data-icon="cable" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 19a1 1 0 0 1-1-1v-2a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2a1 1 0 0 1-1 1z" /><path d="M17 21v-2" /><path d="M19 14V6.5a1 1 0 0 0-7 0v11a1 1 0 0 1-7 0V10" /><path d="M21 21v-2" /><path d="M3 5V3" /><path d="M4 10a2 2 0 0 1-2-2V6a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2a2 2 0 0 1-2 2z" /><path d="M7 5V3" /></svg> Cable</span>
         <span class="tag tag-level">Beginner</span>
       </div>
     </article>
@@ -610,7 +621,7 @@
     <article class="exercise-card" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
       <meta itemprop="position" content="4" />
       <div class="ex-card-top">
-        <div class="ex-icon"><i class="bi bi-grid-fill"></i></div>
+        <div class="ex-icon"><svg class="icon" data-icon="grid-2x2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18" /><path d="M3 12h18" /><rect x="3" y="3" width="18" height="18" rx="2" /></svg></div>
         <div class="ex-meta">
           <div class="ex-rank">#4 Most Popular</div>
           <div class="ex-name" itemprop="name">Leg Press</div>
@@ -618,9 +629,9 @@
       </div>
       <p class="ex-desc">Seat yourself in the leg press machine and push the sled away by extending your legs, keeping feet shoulder-width apart. A compound quad and glute builder that reduces spinal loading compared to squats.</p>
       <div class="ex-tags">
-        <span class="tag tag-muscle"><i class="bi bi-bullseye"></i> Quadriceps</span>
-        <span class="tag tag-muscle"><i class="bi bi-circle"></i> Glutes</span>
-        <span class="tag tag-equipment"><i class="bi bi-gear-fill"></i> Machine</span>
+        <span class="tag tag-muscle"><svg class="icon" data-icon="target" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><circle cx="12" cy="12" r="6" /><circle cx="12" cy="12" r="2" /></svg> Quadriceps</span>
+        <span class="tag tag-muscle"><svg class="icon" data-icon="circle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /></svg> Glutes</span>
+        <span class="tag tag-equipment"><svg class="icon" data-icon="cog" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 10.27 7 3.34" /><path d="m11 13.73-4 6.93" /><path d="M12 22v-2" /><path d="M12 2v2" /><path d="M14 12h8" /><path d="m17 20.66-1-1.73" /><path d="m17 3.34-1 1.73" /><path d="M2 12h2" /><path d="m20.66 17-1.73-1" /><path d="m20.66 7-1.73 1" /><path d="m3.34 17 1.73-1" /><path d="m3.34 7 1.73 1" /><circle cx="12" cy="12" r="2" /><circle cx="12" cy="12" r="8" /></svg> Machine</span>
         <span class="tag tag-level">Beginner</span>
       </div>
     </article>
@@ -629,7 +640,7 @@
     <article class="exercise-card" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
       <meta itemprop="position" content="5" />
       <div class="ex-card-top">
-        <div class="ex-icon"><i class="bi bi-arrow-down-square-fill"></i></div>
+        <div class="ex-icon"><svg class="icon" data-icon="square-arrow-down" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2" /><path d="M12 8v8" /><path d="m8 12 4 4 4-4" /></svg></div>
         <div class="ex-meta">
           <div class="ex-rank">#5 Most Popular</div>
           <div class="ex-name" itemprop="name">Cable Tricep Pushdown</div>
@@ -637,8 +648,8 @@
       </div>
       <p class="ex-desc">Stand at a cable station, elbows pinned to your sides, and press the bar or rope down to full extension before controlling it back up. A staple triceps isolation move that keeps constant tension through the whole rep.</p>
       <div class="ex-tags">
-        <span class="tag tag-muscle"><i class="bi bi-bullseye"></i> Triceps</span>
-        <span class="tag tag-equipment"><i class="bi bi-bezier2"></i> Cable</span>
+        <span class="tag tag-muscle"><svg class="icon" data-icon="target" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><circle cx="12" cy="12" r="6" /><circle cx="12" cy="12" r="2" /></svg> Triceps</span>
+        <span class="tag tag-equipment"><svg class="icon" data-icon="cable" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 19a1 1 0 0 1-1-1v-2a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2a1 1 0 0 1-1 1z" /><path d="M17 21v-2" /><path d="M19 14V6.5a1 1 0 0 0-7 0v11a1 1 0 0 1-7 0V10" /><path d="M21 21v-2" /><path d="M3 5V3" /><path d="M4 10a2 2 0 0 1-2-2V6a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2a2 2 0 0 1-2 2z" /><path d="M7 5V3" /></svg> Cable</span>
         <span class="tag tag-level">Beginner</span>
       </div>
     </article>
@@ -647,7 +658,7 @@
     <article class="exercise-card" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
       <meta itemprop="position" content="6" />
       <div class="ex-card-top">
-        <div class="ex-icon"><i class="bi bi-arrow-repeat"></i></div>
+        <div class="ex-icon"><svg class="icon" data-icon="repeat" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m17 2 4 4-4 4" /><path d="M3 11v-1a4 4 0 0 1 4-4h14" /><path d="m7 22-4-4 4-4" /><path d="M21 13v1a4 4 0 0 1-4 4H3" /></svg></div>
         <div class="ex-meta">
           <div class="ex-rank">#6 Most Popular</div>
           <div class="ex-name" itemprop="name">Leg Extensions</div>
@@ -655,8 +666,8 @@
       </div>
       <p class="ex-desc">Sit in the leg extension machine and extend your legs to full lockout under control. An isolation exercise that directly targets the quadriceps without axial load — ideal for finishing a leg session or knee rehab.</p>
       <div class="ex-tags">
-        <span class="tag tag-muscle"><i class="bi bi-bullseye"></i> Quadriceps</span>
-        <span class="tag tag-equipment"><i class="bi bi-gear-fill"></i> Machine</span>
+        <span class="tag tag-muscle"><svg class="icon" data-icon="target" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><circle cx="12" cy="12" r="6" /><circle cx="12" cy="12" r="2" /></svg> Quadriceps</span>
+        <span class="tag tag-equipment"><svg class="icon" data-icon="cog" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 10.27 7 3.34" /><path d="m11 13.73-4 6.93" /><path d="M12 22v-2" /><path d="M12 2v2" /><path d="M14 12h8" /><path d="m17 20.66-1-1.73" /><path d="m17 3.34-1 1.73" /><path d="M2 12h2" /><path d="m20.66 17-1.73-1" /><path d="m20.66 7-1.73 1" /><path d="m3.34 17 1.73-1" /><path d="m3.34 7 1.73 1" /><circle cx="12" cy="12" r="2" /><circle cx="12" cy="12" r="8" /></svg> Machine</span>
         <span class="tag tag-level">Beginner</span>
       </div>
     </article>
@@ -665,7 +676,7 @@
     <article class="exercise-card" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
       <meta itemprop="position" content="7" />
       <div class="ex-card-top">
-        <div class="ex-icon"><i class="bi bi-arrow-up-circle-fill"></i></div>
+        <div class="ex-icon"><svg class="icon" data-icon="circle-arrow-up" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="m16 12-4-4-4 4" /><path d="M12 16V8" /></svg></div>
         <div class="ex-meta">
           <div class="ex-rank">#7 Most Popular</div>
           <div class="ex-name" itemprop="name">Dumbbell Shoulder Press</div>
@@ -673,9 +684,9 @@
       </div>
       <p class="ex-desc">Press dumbbells from shoulder height to full extension overhead, keeping your core braced throughout. Builds pressing strength and shoulder width through a natural arc of motion that spares the joints.</p>
       <div class="ex-tags">
-        <span class="tag tag-muscle"><i class="bi bi-bullseye"></i> Shoulders</span>
-        <span class="tag tag-muscle"><i class="bi bi-circle"></i> Triceps</span>
-        <span class="tag tag-equipment"><i class="bi bi-box-fill"></i> Dumbbell</span>
+        <span class="tag tag-muscle"><svg class="icon" data-icon="target" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><circle cx="12" cy="12" r="6" /><circle cx="12" cy="12" r="2" /></svg> Shoulders</span>
+        <span class="tag tag-muscle"><svg class="icon" data-icon="circle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /></svg> Triceps</span>
+        <span class="tag tag-equipment"><svg class="icon" data-icon="dumbbell" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17.596 12.768a2 2 0 1 0 2.829-2.829l-1.768-1.767a2 2 0 0 0 2.828-2.829l-2.828-2.828a2 2 0 0 0-2.829 2.828l-1.767-1.768a2 2 0 1 0-2.829 2.829z" /><path d="m2.5 21.5 1.4-1.4" /><path d="m20.1 3.9 1.4-1.4" /><path d="M5.343 21.485a2 2 0 1 0 2.829-2.828l1.767 1.768a2 2 0 1 0 2.829-2.829l-6.364-6.364a2 2 0 1 0-2.829 2.829l1.768 1.767a2 2 0 0 0-2.828 2.829z" /><path d="m9.6 14.4 4.8-4.8" /></svg> Dumbbell</span>
         <span class="tag tag-level">Intermediate</span>
       </div>
     </article>
@@ -684,7 +695,7 @@
     <article class="exercise-card" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
       <meta itemprop="position" content="8" />
       <div class="ex-card-top">
-        <div class="ex-icon"><i class="bi bi-graph-up-arrow"></i></div>
+        <div class="ex-icon"><svg class="icon" data-icon="trending-up" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 7h6v6" /><path d="m22 7-8.5 8.5-5-5L2 17" /></svg></div>
         <div class="ex-meta">
           <div class="ex-rank">#8 Most Popular</div>
           <div class="ex-name" itemprop="name">Hammerstrength Incline Chest Press</div>
@@ -692,9 +703,9 @@
       </div>
       <p class="ex-desc">Set the seat so the handles sit at upper-chest height, then press each side independently through a fixed incline path. A plate-loaded machine press that targets the upper chest with less stabilization demand than a barbell.</p>
       <div class="ex-tags">
-        <span class="tag tag-muscle"><i class="bi bi-bullseye"></i> Upper Chest</span>
-        <span class="tag tag-muscle"><i class="bi bi-circle"></i> Shoulders · Triceps</span>
-        <span class="tag tag-equipment"><i class="bi bi-gear-fill"></i> Machine</span>
+        <span class="tag tag-muscle"><svg class="icon" data-icon="target" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><circle cx="12" cy="12" r="6" /><circle cx="12" cy="12" r="2" /></svg> Upper Chest</span>
+        <span class="tag tag-muscle"><svg class="icon" data-icon="circle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /></svg> Shoulders · Triceps</span>
+        <span class="tag tag-equipment"><svg class="icon" data-icon="cog" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 10.27 7 3.34" /><path d="m11 13.73-4 6.93" /><path d="M12 22v-2" /><path d="M12 2v2" /><path d="M14 12h8" /><path d="m17 20.66-1-1.73" /><path d="m17 3.34-1 1.73" /><path d="M2 12h2" /><path d="m20.66 17-1.73-1" /><path d="m20.66 7-1.73 1" /><path d="m3.34 17 1.73-1" /><path d="m3.34 7 1.73 1" /><circle cx="12" cy="12" r="2" /><circle cx="12" cy="12" r="8" /></svg> Machine</span>
         <span class="tag tag-level">Intermediate</span>
       </div>
     </article>
@@ -703,7 +714,7 @@
     <article class="exercise-card" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
       <meta itemprop="position" content="9" />
       <div class="ex-card-top">
-        <div class="ex-icon"><i class="bi bi-arrows-expand"></i></div>
+        <div class="ex-icon"><svg class="icon" data-icon="unfold-horizontal" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 12h6" /><path d="M8 12H2" /><path d="M12 2v2" /><path d="M12 8v2" /><path d="M12 14v2" /><path d="M12 20v2" /><path d="m19 15 3-3-3-3" /><path d="m5 9-3 3 3 3" /></svg></div>
         <div class="ex-meta">
           <div class="ex-rank">#9 Most Popular</div>
           <div class="ex-name" itemprop="name">Machine Hip Abductor</div>
@@ -711,8 +722,8 @@
       </div>
       <p class="ex-desc">Sit in the machine with the pads against the outside of your knees, then push your legs apart against the resistance. An isolation move that strengthens the glute medius and outer hip for better stability in squats, lunges, and single-leg work.</p>
       <div class="ex-tags">
-        <span class="tag tag-muscle"><i class="bi bi-bullseye"></i> Abductors</span>
-        <span class="tag tag-equipment"><i class="bi bi-gear-fill"></i> Machine</span>
+        <span class="tag tag-muscle"><svg class="icon" data-icon="target" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><circle cx="12" cy="12" r="6" /><circle cx="12" cy="12" r="2" /></svg> Abductors</span>
+        <span class="tag tag-equipment"><svg class="icon" data-icon="cog" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 10.27 7 3.34" /><path d="m11 13.73-4 6.93" /><path d="M12 22v-2" /><path d="M12 2v2" /><path d="M14 12h8" /><path d="m17 20.66-1-1.73" /><path d="m17 3.34-1 1.73" /><path d="M2 12h2" /><path d="m20.66 17-1.73-1" /><path d="m20.66 7-1.73 1" /><path d="m3.34 17 1.73-1" /><path d="m3.34 7 1.73 1" /><circle cx="12" cy="12" r="2" /><circle cx="12" cy="12" r="8" /></svg> Machine</span>
         <span class="tag tag-level">Beginner</span>
       </div>
     </article>
@@ -721,7 +732,7 @@
     <article class="exercise-card" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
       <meta itemprop="position" content="10" />
       <div class="ex-card-top">
-        <div class="ex-icon"><i class="bi bi-arrows-collapse"></i></div>
+        <div class="ex-icon"><svg class="icon" data-icon="fold-horizontal" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12h6" /><path d="M22 12h-6" /><path d="M12 2v2" /><path d="M12 8v2" /><path d="M12 14v2" /><path d="M12 20v2" /><path d="m19 9-3 3 3 3" /><path d="m5 15 3-3-3-3" /></svg></div>
         <div class="ex-meta">
           <div class="ex-rank">#10 Most Popular</div>
           <div class="ex-name" itemprop="name">Machine Hip Adductor</div>
@@ -729,8 +740,8 @@
       </div>
       <p class="ex-desc">Sit in the machine with the pads against the outside of your knees, then squeeze your legs together against the resistance. An isolation move that strengthens the often-neglected adductors for hip stability and injury resilience.</p>
       <div class="ex-tags">
-        <span class="tag tag-muscle"><i class="bi bi-bullseye"></i> Adductors</span>
-        <span class="tag tag-equipment"><i class="bi bi-gear-fill"></i> Machine</span>
+        <span class="tag tag-muscle"><svg class="icon" data-icon="target" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><circle cx="12" cy="12" r="6" /><circle cx="12" cy="12" r="2" /></svg> Adductors</span>
+        <span class="tag tag-equipment"><svg class="icon" data-icon="cog" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 10.27 7 3.34" /><path d="m11 13.73-4 6.93" /><path d="M12 22v-2" /><path d="M12 2v2" /><path d="M14 12h8" /><path d="m17 20.66-1-1.73" /><path d="m17 3.34-1 1.73" /><path d="M2 12h2" /><path d="m20.66 17-1.73-1" /><path d="m20.66 7-1.73 1" /><path d="m3.34 17 1.73-1" /><path d="m3.34 7 1.73 1" /><circle cx="12" cy="12" r="2" /><circle cx="12" cy="12" r="8" /></svg> Machine</span>
         <span class="tag tag-level">Beginner</span>
       </div>
     </article>
@@ -752,7 +763,7 @@
   </div>
 
   <div class="template-card" style="max-width: 640px;">
-    <div class="tpl-icon"><i class="bi bi-clipboard2-pulse-fill"></i></div>
+    <div class="tpl-icon"><svg class="icon" data-icon="clipboard-list" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="8" height="4" x="8" y="2" rx="1" ry="1" /><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" /><path d="M12 11h4" /><path d="M12 16h4" /><path d="M8 11h.01" /><path d="M8 16h.01" /></svg></div>
     <div class="tpl-split">Skill · training-coach.md</div>
     <div class="tpl-name" style="padding-right:0;">Turn your export into a coaching session</div>
     <p class="tpl-desc">
@@ -766,7 +777,7 @@
       <span class="tag tag-muscle">Logging gaps</span>
     </div>
     <a class="tpl-import-btn" href="assets/skills/training-coach.md" download>
-      <i class="bi bi-download"></i> Download Skill
+      <svg class="icon" data-icon="download" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15V3" /><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><path d="m7 10 5 5 5-5" /></svg> Download Skill
     </a>
   </div>
 </section>
@@ -788,7 +799,7 @@
     <!-- Placeholder 1 -->
     <div class="template-card coming-soon">
       <span class="tpl-badge">Coming Soon</span>
-      <div class="tpl-icon"><i class="bi bi-arrow-up-right-circle-fill"></i></div>
+      <div class="tpl-icon"><svg class="icon" data-icon="circle-arrow-out-up-right" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12A10 10 0 1 1 12 2" /><path d="M22 2 12 12" /><path d="M16 2h6v6" /></svg></div>
       <div class="tpl-split">Push Day</div>
       <div class="tpl-name">Classic Push Day A</div>
       <p class="tpl-desc">Chest-led push session with shoulder and triceps accessories. Balanced volume for strength and hypertrophy.</p>
@@ -802,7 +813,7 @@
     <!-- Placeholder 2 -->
     <div class="template-card coming-soon">
       <span class="tpl-badge">Coming Soon</span>
-      <div class="tpl-icon"><i class="bi bi-arrow-down-left-circle-fill"></i></div>
+      <div class="tpl-icon"><svg class="icon" data-icon="circle-arrow-out-down-left" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12a10 10 0 1 1 10 10" /><path d="m2 22 10-10" /><path d="M8 22H2v-6" /></svg></div>
       <div class="tpl-split">Pull Day</div>
       <div class="tpl-name">Classic Pull Day A</div>
       <p class="tpl-desc">Back-focused pulling session with rowing and pull-down movements, finished with targeted biceps work.</p>
@@ -816,7 +827,7 @@
     <!-- Placeholder 3 -->
     <div class="template-card coming-soon">
       <span class="tpl-badge">Coming Soon</span>
-      <div class="tpl-icon"><i class="bi bi-grid-3x3-gap-fill"></i></div>
+      <div class="tpl-icon"><svg class="icon" data-icon="grid-3x3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2" /><path d="M3 9h18" /><path d="M3 15h18" /><path d="M9 3v18" /><path d="M15 3v18" /></svg></div>
       <div class="tpl-split">Leg Day</div>
       <div class="tpl-name">Classic Leg Day</div>
       <p class="tpl-desc">Squat-pattern primary with leg press, hamstring curls, and calf work. Structured for progressive overload over 4-week cycles.</p>
@@ -830,7 +841,7 @@
     <!-- Placeholder 4 -->
     <div class="template-card coming-soon">
       <span class="tpl-badge">Coming Soon</span>
-      <div class="tpl-icon"><i class="bi bi-layout-wtf"></i></div>
+      <div class="tpl-icon"><svg class="icon" data-icon="layout-dashboard" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="7" height="9" x="3" y="3" rx="1" /><rect width="7" height="5" x="14" y="3" rx="1" /><rect width="7" height="9" x="14" y="12" rx="1" /><rect width="7" height="5" x="3" y="16" rx="1" /></svg></div>
       <div class="tpl-split">Full Body</div>
       <div class="tpl-name">Full Body Strength</div>
       <p class="tpl-desc">One session hits every major muscle group. Ideal for 2–3 days per week training. Pairs a compound push, pull, and leg movement each session.</p>
@@ -842,7 +853,7 @@
     <!-- Placeholder 5 -->
     <div class="template-card coming-soon">
       <span class="tpl-badge">Coming Soon</span>
-      <div class="tpl-icon"><i class="bi bi-columns-gap"></i></div>
+      <div class="tpl-icon"><svg class="icon" data-icon="columns-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2" /><path d="M9 3v18" /><path d="M15 3v18" /></svg></div>
       <div class="tpl-split">Upper / Lower</div>
       <div class="tpl-name">Upper Body Day</div>
       <p class="tpl-desc">Horizontal and vertical push/pull supersets for efficient upper body training. Great for 4-day Upper/Lower splits.</p>
@@ -857,7 +868,7 @@
     <!-- Placeholder 6 -->
     <div class="template-card coming-soon">
       <span class="tpl-badge">Coming Soon</span>
-      <div class="tpl-icon"><i class="bi bi-columns"></i></div>
+      <div class="tpl-icon"><svg class="icon" data-icon="columns-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2" /><path d="M12 3v18" /></svg></div>
       <div class="tpl-split">Upper / Lower</div>
       <div class="tpl-name">Lower Body Day</div>
       <p class="tpl-desc">Quad and hip-hinge focused lower session to pair with Upper Body Day. Includes unilateral work for balanced development.</p>
@@ -893,10 +904,12 @@
 </main>
 
 <!-- ═══════════════════════════════════ FOOTER ═══ -->
+<!-- partial:landing-footer -->
+<!-- Generated from partials/landing-footer.html by scripts/build.mjs. Edit the partial, not this copy. -->
 <footer>
   <div class="footer-brand">
     <div class="footer-brand-logo">
-      <img class="logo-img" src="assets/icon.png" alt="" style="width:40px;height:40px;border-radius:10px;" />
+      <img class="logo-img" src="/assets/icon.png" alt="" style="width:40px;height:40px;border-radius:10px;" />
       <span class="logo-name">Rep</span>
     </div>
     <p class="footer-tagline">The workout tracker<br>that adapts to you.</p>
@@ -906,16 +919,17 @@
     <h4>Get the app</h4>
     <a href="https://apps.apple.com/us/app/rep-the-workout-app/id6765540272" target="_blank" rel="noopener noreferrer">Download on the App Store</a>
     <a href="https://play.google.com/store/apps/details?id=com.reptheworkout.app&hl=en_US" target="_blank" rel="noopener noreferrer">Get it on Google Play</a>
-    <a href="invite/">Invite a Friend</a>
+    <a href="/invite/">Invite a Friend</a>
   </div>
 
   <div class="footer-col">
     <h4>Legal &amp; Support</h4>
-    <a href="privacy.html">Privacy Policy</a>
-    <a href="tos.html">Terms of Service</a>
-    <a href="community-guidelines.html">Community Guidelines</a>
-    <a href="faq.html">FAQ</a>
-    <a href="delete-account.html">Delete Account</a>
+    <a href="/privacy.html">Privacy Policy</a>
+    <a href="/tos.html">Terms of Service</a>
+    <a href="/community-guidelines.html">Community Guidelines</a>
+    <a href="/faq.html">FAQ</a>
+    <a href="/changelog.html">What's New</a>
+    <a href="/delete-account.html">Delete Account</a>
     <a href="mailto:rep.app.dev@gmail.com">Contact</a>
   </div>
 
@@ -923,6 +937,7 @@
     &copy; 2026 Rep — The Workout App &nbsp;·&nbsp; Questions? <a href="mailto:rep.app.dev@gmail.com" style="color:var(--accent-text);">rep.app.dev@gmail.com</a>
   </p>
 </footer>
+<!-- /partial:landing-footer -->
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js" integrity="sha512-NcZdtrT77bJr4STcmsGAESr06BYGE8woZdSdEgqnpyqac7sugNO+Tr4bGwGF3MsnEkGKhU2KL2xh6Ec+BqsaHA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -935,13 +950,11 @@
   }, { passive: true });
 
   const navCollapse = document.getElementById('nav-collapse');
-  const menuIcon = document.getElementById('menu-icon');
   let navOpen = false;
 
   function toggleNav() {
     navOpen = !navOpen;
     navCollapse.classList.toggle('open', navOpen);
-    menuIcon.className = navOpen ? 'bi bi-x' : 'bi bi-list';
     const btn = document.getElementById('menu-btn');
     btn.setAttribute('aria-expanded', String(navOpen));
     btn.setAttribute('aria-label', navOpen ? 'Close menu' : 'Open menu');

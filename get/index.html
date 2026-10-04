@@ -3,23 +3,36 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Changelog — Rep: The Workout App</title>
-  <meta name="description" content="What&#x27;s new in Rep — release notes for every update to the workout tracker." />
-  <link rel="canonical" href="https://repworkout.app/changelog" />
-  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png" />
-  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
+  <title>Get Rep — The Workout App</title>
+  <meta name="description" content="Download Rep — the workout tracker that adapts to you — on the App Store or Google Play." />
+  <meta name="robots" content="noindex" />
+  <link rel="canonical" href="https://repworkout.app/get/" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png" />
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
   <meta name="theme-color" content="#F7EEDC" />
-  <meta property="og:title" content="Changelog — Rep: The Workout App" />
-  <meta property="og:description" content="What&#x27;s new in Rep — release notes for every update to the workout tracker." />
+  <meta property="og:title" content="Get Rep — The Workout App" />
+  <meta property="og:description" content="Download Rep — the workout tracker that adapts to you — on the App Store or Google Play." />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://repworkout.app/changelog" />
+  <meta property="og:url" content="https://repworkout.app/get/" />
   <meta property="og:site_name" content="Rep — The Workout App" />
   <meta property="og:image" content="https://repworkout.app/assets/og-image.jpg" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
-  <meta property="og:image:alt" content="Rep app — Train smarter. Progress faster." />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:image" content="https://repworkout.app/assets/og-image.jpg" />
+  <!-- Target of the homepage QR code: phones go straight to their store;
+       everyone else gets both buttons below. -->
+  <script>
+    (function () {
+      var ua = navigator.userAgent || '';
+      // iPadOS reports a desktop Mac UA, so also check for touch.
+      var ios = /iPhone|iPad|iPod/i.test(ua) || (/Macintosh/i.test(ua) && navigator.maxTouchPoints > 1);
+      if (/android/i.test(ua)) window.location.replace('https://play.google.com/store/apps/details?id=com.reptheworkout.app&hl=en_US');
+      else if (ios) window.location.replace('https://apps.apple.com/us/app/rep-the-workout-app/id6765540272');
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -28,22 +41,15 @@
     :root {
       --bg:            #F7EEDC;
       --surface:       #FCF6E9;
-      --surface-alt:   #EDDFC4;
       --surface-muted: #F1E5CB;
       --text:          #3E2819;
       --text-sub:      #735440;
       --text-muted:    #7A5D44;
-      --text-on-accent:#FFFFFF;
       --border:        #DFD0B4;
-      --divider:       rgba(62,40,25,0.09);
       --accent:        #AD5936;
       --accent-fg:     #FFFFFF;
       --accent-muted:  rgba(184,96,60,0.14);
       --accent-text:   #934A2C;
-      --danger-bg:     rgba(185,74,63,0.12);
-      --danger-text:   #8F3528;
-      --info-bg:       rgba(62,40,25,0.06);
-      --warn-bg:       rgba(185,74,63,0.09);
     }
 
     body {
@@ -57,149 +63,34 @@
       flex-direction: column;
     }
 
-    /* ── Main layout ── */
+    /* ── Get the app ── */
     main {
       flex: 1;
-      max-width: 680px;
-      width: 100%;
-      margin: 0 auto;
-      padding: 2rem 1.25rem 3.5rem;
-    }
-
-    /* ── Page heading ── */
-    .page-heading {
-      margin-bottom: 1.75rem;
-    }
-    .page-heading h1 {
-      font-size: 1.4rem;
-      font-weight: 600;
-      color: var(--text);
-      margin-bottom: 0.35rem;
-    }
-    .page-heading p {
-      font-size: 0.88rem;
-      color: var(--text-sub);
-    }
-
-    /* ── Version heading ── */
-    .version-heading {
       display: flex;
-      align-items: baseline;
-      justify-content: space-between;
-      gap: 0.75rem;
-      margin-bottom: 0.55rem;
-      margin-top: 2rem;
-    }
-    .version-heading:first-of-type { margin-top: 0; }
-    .version-heading h2 {
-      font-size: 0.95rem;
-      font-weight: 600;
-      color: var(--text);
-    }
-    .version-heading .version-date {
-      font-size: 0.76rem;
-      color: var(--text-muted);
-      white-space: nowrap;
-    }
-
-    /* ── Cards ── */
-    .card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      overflow: hidden;
-      margin-bottom: 1rem;
-    }
-
-    /* ── Content rows inside cards ── */
-    .content-row {
-      padding: 0.875rem 1rem;
-      border-bottom: 1px solid var(--divider);
-    }
-    .content-row:last-child { border-bottom: none; }
-    .content-row .sub-heading {
-      font-size: 0.78rem;
-      font-weight: 600;
-      letter-spacing: 0.03em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      margin-bottom: 0.4rem;
-    }
-    .content-row:not(:first-child) .sub-heading {
-      margin-top: 0.25rem;
-    }
-    .content-row p,
-    .content-row ul {
-      font-size: 0.81rem;
-      color: var(--text-sub);
-      line-height: 1.65;
-    }
-    .content-row ul {
-      padding-left: 1.1rem;
-      margin-top: 0.3rem;
-    }
-    .content-row li { margin-bottom: 0.3rem; }
-    .content-row a { color: var(--accent-text); text-decoration: none; }
-    .content-row a:hover { text-decoration: underline; }
-
-    /* ── Contact box ── */
-    .contact-row {
-      display: flex;
+      flex-direction: column;
       align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-      padding: 1rem;
+      justify-content: center;
+      text-align: center;
+      padding: 3rem 1.25rem 4rem;
     }
-    .contact-row-left strong {
-      display: block;
-      font-size: 0.88rem;
-      font-weight: 500;
-      color: var(--text);
-      margin-bottom: 0.15rem;
-    }
-    .contact-row-left p {
-      font-size: 0.81rem;
-      color: var(--text-sub);
-    }
+    .app-icon { width: 88px; height: 88px; border-radius: 20px; margin-bottom: 1.25rem; box-shadow: 0 12px 30px rgba(62,40,25,0.15); }
+    h1 { font-size: 1.5rem; font-weight: 600; margin-bottom: 0.5rem; }
+    .lead { color: var(--text-sub); max-width: 420px; margin-bottom: 1.75rem; }
+    .actions { display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center; margin-bottom: 1.5rem; }
     .btn {
-      display: inline-flex;
-      align-items: center;
-      background: var(--accent);
-      color: var(--accent-fg);
-      font-size: 0.81rem;
-      font-weight: 600;
-      padding: 0.5rem 1rem;
-      border-radius: 8px;
-      text-decoration: none;
-      white-space: nowrap;
-      flex-shrink: 0;
-      transition: opacity 0.15s;
+      display: inline-flex; align-items: center; gap: 0.45rem;
+      padding: 11px 22px; border-radius: 10px;
+      font-family: inherit; font-size: 0.92rem; font-weight: 600;
+      text-decoration: none; transition: filter 0.2s, background 0.2s;
     }
-    .btn:hover { opacity: 0.85; }
+    .btn-primary { background: var(--accent); color: var(--accent-fg); }
+    .btn-primary:hover { filter: brightness(1.07); }
+    .btn-outline { color: var(--text); border: 1.5px solid var(--border); }
+    .btn-outline:hover { background: var(--surface-muted); }
+    .links { font-size: 0.88rem; color: var(--text-muted); }
+    .links a { color: var(--accent-text); text-decoration: none; font-weight: 500; }
+    .links a:hover { text-decoration: underline; }
 
-    /* ── Footer ── */
-
-    @media (max-width: 480px) {
-      .contact-row { flex-direction: column; align-items: flex-start; }
-      .version-heading { flex-direction: column; align-items: flex-start; gap: 0.15rem; }
-      main { padding: 1.5rem 1rem 2.5rem; }
-    }
-
-    /* ── Page entrance & cross-page transitions ── */
-    @view-transition { navigation: auto; }
-    ::view-transition-old(root),
-    ::view-transition-new(root) { animation-duration: 0.28s; }
-    header { view-transition-name: site-header; }
-
-    @media (prefers-reduced-motion: no-preference) {
-      main { animation: page-enter 0.55s cubic-bezier(0.22, 1, 0.36, 1) both; }
-    }
-    @keyframes page-enter {
-      from { opacity: 0; transform: translateY(14px); }
-    }
-    @media (prefers-reduced-motion: reduce) {
-      @view-transition { navigation: none; }
-    }
   
     /* Keyboard focus ring (mouse clicks don't trigger :focus-visible) */
     :where(a, button, summary, input, select, textarea, [tabindex]):focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
@@ -280,7 +171,6 @@
 <!-- /partial:info-chrome-css -->
 </head>
 <body>
-
   <!-- partial:info-header -->
 <!-- Generated from partials/info-header.html by scripts/build.mjs. Edit the partial, not this copy. -->
 <header>
@@ -305,82 +195,18 @@
 <!-- /partial:info-header -->
 
   <main>
-    <div class="page-heading">
-      <h1>Changelog</h1>
-      <p>What's new in Rep, release by release. We ship roughly every two weeks.</p>
+    <img class="app-icon" src="/assets/icon.png" alt="" width="88" height="88" />
+    <h1>Get Rep</h1>
+    <p class="lead">The workout tracker that adapts to you. Free on iPhone and Android.</p>
+    <div class="actions">
+      <a class="btn btn-primary" href="https://apps.apple.com/us/app/rep-the-workout-app/id6765540272" rel="noopener noreferrer">
+        <svg class="icon" data-icon="apple" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" stroke="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg> Download on the App Store
+      </a>
+      <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=com.reptheworkout.app&hl=en_US" rel="noopener noreferrer">
+        <svg class="icon" data-icon="google-play" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" stroke="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.609 1.814 13.792 12 3.609 22.186a1.5 1.5 0 0 1-.609-1.207V3.021a1.5 1.5 0 0 1 .609-1.207zm10.831 10.83 2.36-2.36 4.28 2.44a1.5 1.5 0 0 1 0 2.552l-4.28 2.44-2.36-2.36-1.828-1.826zm-1.06-1.061L5.316 3.516l9.649 5.507-1.86 1.86zm0 1.968 1.86 1.86-9.649 5.507 7.789-8.157v-.03z"/></svg> Get it on Google Play
+      </a>
     </div>
-
-    <div class="version-heading">
-      <h2>Version 1.0.2</h2>
-      <span class="version-date">July 2026</span>
-    </div>
-    <div class="card">
-      <div class="content-row">
-        <p class="sub-heading">New</p>
-        <ul>
-          <li>Import your workout history from Hevy or Strong, on top of existing Fitbod support</li>
-          <li>Recovery suggestions now account for specific muscle heads (chest, shoulders, biceps, triceps), not just the muscle group as a whole</li>
-          <li>The plate calculator now uses the actual plates you've told it your Workout Space owns</li>
-          <li>Android push notifications now work</li>
-        </ul>
-      </div>
-      <div class="content-row">
-        <p class="sub-heading">Fixed</p>
-        <ul>
-          <li>Sleep, resting heart rate, and HRV could get stuck showing old readings instead of your latest data</li>
-          <li>Personal record trophies could disappear if you left a session and came back</li>
-          <li>Personal records are now compared correctly whether you log in kg or lbs</li>
-          <li>Several keyboard overlap issues across settings and other screens</li>
-          <li>Exercise search now ignores extra spaces ("push down" now matches "Pushdown")</li>
-        </ul>
-      </div>
-      <div class="content-row">
-        <p class="sub-heading">Security &amp; stability</p>
-        <ul>
-          <li>Tightened up permissions around notifications and blocked-user data</li>
-          <li>General backend hardening and stability improvements</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="version-heading">
-      <h2>Version 1.0.0 / 1.0.1</h2>
-      <span class="version-date">June 2026</span>
-    </div>
-    <div class="card">
-      <div class="content-row">
-        <p class="sub-heading">Rep is live!</p>
-        <p>Our initial App Store release.</p>
-      </div>
-      <div class="content-row">
-        <p class="sub-heading">New</p>
-        <ul>
-          <li>Report incorrect exercise info — wrong equipment, weight input, name, or muscles — right from your workout</li>
-          <li>See who liked your posts, with follow, block, and report options</li>
-          <li>A dedicated notifications screen</li>
-          <li>Sleep and HRV history tracking</li>
-          <li>Smarter exercise search that understands alternate names</li>
-        </ul>
-      </div>
-      <div class="content-row">
-        <p class="sub-heading">Fixed</p>
-        <p>Various bug fixes and stability improvements ahead of launch.</p>
-      </div>
-    </div>
-
-    <!-- Contact -->
-    <div class="card" style="margin-top:2rem;margin-bottom:0;">
-      <div class="contact-row">
-        <div class="contact-row-left">
-          <strong>Have feedback on a release?</strong>
-          <p>We'll get back to you as soon as we can.</p>
-        </div>
-        <a class="btn" href="mailto:rep.app.dev@gmail.com?subject=Rep%20Changelog%20Feedback">
-          Email us ↗
-        </a>
-      </div>
-    </div>
-
+    <p class="links"><a href="/">Learn more about Rep</a></p>
   </main>
 
   <!-- partial:info-footer -->
@@ -399,7 +225,7 @@
 </footer>
 <!-- /partial:info-footer -->
 
-<script src="assets/store-links.js"></script>
-<script src="assets/site-nav.js"></script>
+<script src="/assets/store-links.js"></script>
+<script src="/assets/site-nav.js"></script>
 </body>
 </html>

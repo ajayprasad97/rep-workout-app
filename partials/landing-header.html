@@ -1,0 +1,26 @@
+<!-- Generated from partials/landing-header.html by scripts/build.mjs. Edit the partial, not this copy. -->
+<header id="site-header">
+  <a href="/" class="header-logo">
+    <img class="logo-img" src="/assets/icon.png" alt="" />
+    <span class="logo-name">Rep</span>
+  </a>
+
+  <div class="collapsible-header" id="nav-collapse">
+    <nav>
+      <a class="nav-link" data-nav="features" href="/#features">Features</a>
+      <a class="nav-link" data-nav="top" href="/top.html">Top Exercises</a>
+      <a class="nav-link" data-nav="faq" href="/faq.html">FAQ</a>
+      <a class="nav-link" data-nav="privacy" href="/privacy.html">Privacy</a>
+    </nav>
+    <div class="header-actions">
+      <a class="btn btn-primary btn-pill" data-store-primary data-store-short href="https://apps.apple.com/us/app/rep-the-workout-app/id6765540272" target="_blank" rel="noopener noreferrer">
+        <span data-store-icon><svg class="icon" data-icon="apple" width="16" height="16"></svg></span> Download
+      </a>
+    </div>
+  </div>
+
+  <button id="menu-btn" onclick="toggleNav()" aria-label="Open menu" aria-expanded="false" aria-controls="nav-collapse">
+    <svg class="icon menu-icon-open" data-icon="menu"></svg>
+    <svg class="icon menu-icon-close" data-icon="x"></svg>
+  </button>
+</header>
