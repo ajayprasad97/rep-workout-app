@@ -8,6 +8,7 @@
   function setOpen(open) {
     nav.classList.toggle('open', open);
     btn.setAttribute('aria-expanded', String(open));
+    btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
   }
 
   btn.addEventListener('click', function (e) {
@@ -18,6 +19,13 @@
   document.addEventListener('click', function (e) {
     if (nav.classList.contains('open') && !nav.contains(e.target) && !btn.contains(e.target)) {
       setOpen(false);
+    }
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && nav.classList.contains('open')) {
+      setOpen(false);
+      btn.focus();
     }
   });
 

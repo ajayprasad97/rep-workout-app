@@ -497,7 +497,7 @@
 <!-- ═══════════════════════════════════ HEADER ═══ -->
 <header id="site-header">
   <a href="." class="header-logo">
-    <img class="logo-img" src="assets/icon.png" alt="Rep logo" />
+    <img class="logo-img" src="assets/icon.png" alt="" />
     <span class="logo-name">Rep</span>
   </a>
 
@@ -516,8 +516,8 @@
     </div>
   </div>
 
-  <button id="menu-btn" onclick="toggleNav()" aria-label="Open menu">
-    <i class="bi bi-list" id="menu-icon"></i>
+  <button id="menu-btn" onclick="toggleNav()" aria-label="Open menu" aria-expanded="false" aria-controls="nav-collapse">
+    <i class="bi bi-list" id="menu-icon" aria-hidden="true"></i>
   </button>
 </header>
 
@@ -896,7 +896,7 @@
 <footer>
   <div class="footer-brand">
     <div class="footer-brand-logo">
-      <img class="logo-img" src="assets/icon.png" alt="Rep logo" style="width:40px;height:40px;border-radius:10px;" />
+      <img class="logo-img" src="assets/icon.png" alt="" style="width:40px;height:40px;border-radius:10px;" />
       <span class="logo-name">Rep</span>
     </div>
     <p class="footer-tagline">The workout tracker<br>that adapts to you.</p>
@@ -942,6 +942,9 @@
     navOpen = !navOpen;
     navCollapse.classList.toggle('open', navOpen);
     menuIcon.className = navOpen ? 'bi bi-x' : 'bi bi-list';
+    const btn = document.getElementById('menu-btn');
+    btn.setAttribute('aria-expanded', String(navOpen));
+    btn.setAttribute('aria-label', navOpen ? 'Close menu' : 'Open menu');
     if (navOpen) {
       setTimeout(() => window.addEventListener('click', onNavOutside), 10);
     } else {
@@ -956,6 +959,13 @@
 
   navCollapse.querySelectorAll('a').forEach(a => {
     a.addEventListener('click', () => { if (navOpen) toggleNav(); });
+  });
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && navOpen) {
+      toggleNav();
+      document.getElementById('menu-btn').focus();
+    }
   });
 
   if (!window.gsap || !window.ScrollTrigger) {
