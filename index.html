@@ -8,6 +8,36 @@
   <meta property="og:title" content="Rep — The Workout App" />
   <meta property="og:description" content="Train smarter. Progress faster. Rep adapts to your goals, equipment, and schedule." />
   <meta property="og:type" content="website" />
+  <link rel="canonical" href="https://repworkout.app/" />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png" />
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
+  <meta name="theme-color" content="#F7EEDC" />
+  <meta property="og:url" content="https://repworkout.app/" />
+  <meta property="og:site_name" content="Rep — The Workout App" />
+  <meta property="og:image" content="https://repworkout.app/assets/og-image.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Rep app — Train smarter. Progress faster." />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://repworkout.app/assets/og-image.jpg" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "MobileApplication",
+    "name": "Rep — The Workout App",
+    "url": "https://repworkout.app/",
+    "image": "https://repworkout.app/assets/og-image.jpg",
+    "description": "A workout tracker that adapts to you — personalised splits, recovery insights, and a social feed built for serious athletes.",
+    "applicationCategory": "HealthApplication",
+    "operatingSystem": "iOS, Android",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "installUrl": [
+      "https://apps.apple.com/us/app/rep-the-workout-app/id6765540272",
+      "https://play.google.com/store/apps/details?id=com.reptheworkout.app"
+    ]
+  }
+  </script>
 
   <!-- Marks JS as available so CSS can pre-hide reveal elements without breaking no-JS visitors -->
   <script>document.documentElement.classList.add('js');</script>
@@ -690,7 +720,7 @@
 <!-- ═══════════════════════════════════════ HEADER ═══ -->
 <header id="site-header">
   <a href="." class="header-logo">
-    <img class="logo-img" src="assets/icon.png" alt="Rep logo" />
+    <img class="logo-img" src="assets/icon.png" alt="" />
     <span class="logo-name">Rep</span>
   </a>
 
@@ -708,8 +738,8 @@
     </div>
   </div>
 
-  <button id="menu-btn" onclick="toggleNav()" aria-label="Open menu">
-    <i class="bi bi-list" id="menu-icon"></i>
+  <button id="menu-btn" onclick="toggleNav()" aria-label="Open menu" aria-expanded="false" aria-controls="nav-collapse">
+    <i class="bi bi-list" id="menu-icon" aria-hidden="true"></i>
   </button>
 </header>
 
@@ -747,7 +777,7 @@
   <div class="hero-phone-wrap reveal-up">
     <div class="hero-glow"></div>
     <div class="phone-frame" id="hero-phone">
-      <img src="assets/social.png" alt="Rep social feed" class="phone-screenshot" fetchpriority="high" decoding="async">
+      <img src="assets/social.png" alt="Rep's social feed: friends' workout posts showing volume, duration, exercise count and PR badges, with Like and Comment buttons" class="phone-screenshot" fetchpriority="high" decoding="async">
     </div>
   </div>
 </section>
@@ -822,7 +852,7 @@
     <div class="features-phone-col">
       <div class="features-phone-sticky">
         <div class="phone-frame" style="width:240px;">
-          <img src="assets/workout.png" alt="Rep workout screen" class="phone-screenshot" loading="lazy" decoding="async">
+          <img src="assets/workout.png" alt="Rep's workout screen: a generated Lower day with Upper/Lower split tabs and a list of exercises tagged by muscle group" class="phone-screenshot" loading="lazy" decoding="async">
         </div>
       </div>
     </div>
@@ -968,7 +998,7 @@
 
     <div class="cta-phone-col reveal-up">
       <div class="phone-frame" style="width:230px;">
-        <img src="assets/share.png" alt="Rep workout summary" class="phone-screenshot" loading="lazy" decoding="async">
+        <img src="assets/share.png" alt="Rep's Share Workout sheet: per-exercise max weight, total volume and estimated one-rep max, with personal records highlighted" class="phone-screenshot" loading="lazy" decoding="async">
       </div>
     </div>
   </div>
@@ -980,7 +1010,7 @@
 <footer>
   <div class="footer-brand">
     <div class="footer-brand-logo">
-      <img class="logo-img" src="assets/icon.png" alt="Rep logo" style="width:40px;height:40px;border-radius:10px;" />
+      <img class="logo-img" src="assets/icon.png" alt="" style="width:40px;height:40px;border-radius:10px;" />
       <span class="logo-name">Rep</span>
     </div>
     <p class="footer-tagline">The workout tracker<br>that adapts to you.</p>
@@ -1030,6 +1060,9 @@
     navOpen = !navOpen;
     navCollapse.classList.toggle('open', navOpen);
     menuIcon.className = navOpen ? 'bi bi-x' : 'bi bi-list';
+    const btn = document.getElementById('menu-btn');
+    btn.setAttribute('aria-expanded', String(navOpen));
+    btn.setAttribute('aria-label', navOpen ? 'Close menu' : 'Open menu');
     if (navOpen) {
       setTimeout(() => window.addEventListener('click', onNavOutside), 10);
     } else {
@@ -1046,6 +1079,13 @@
 
   navCollapse.querySelectorAll('a').forEach(a => {
     a.addEventListener('click', () => { if (navOpen) toggleNav(); });
+  });
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && navOpen) {
+      toggleNav();
+      document.getElementById('menu-btn').focus();
+    }
   });
 
   // ── GSAP ──
