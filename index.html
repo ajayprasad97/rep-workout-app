@@ -491,36 +491,165 @@
     #adaptive {
       padding: 96px 8%;
       border-top: 1px solid var(--border);
+      --sage-bg:   #E5E3C9;
+      --sage-text: #545B2E;
     }
-    .adaptive-layout {
-      display: flex;
-      gap: 6%;
-      align-items: flex-start;
-    }
-    .adaptive-intro {
-      flex: 0 0 34%;
-      position: sticky;
-      top: 96px;
-    }
-    .adaptive-intro .section-title { margin-bottom: 1.1rem; }
+    #adaptive .section-title { margin-bottom: 1rem; }
     .adaptive-lede {
-      font-size: 1rem;
+      font-size: 1.05rem;
       color: var(--text-sub);
       line-height: 1.65;
-      max-width: 34ch;
+      max-width: 52ch;
+      margin-bottom: 2.75rem;
     }
-    .adaptive-list {
-      flex: 1;
-      list-style: none;
+    .adaptive-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 1rem;
+    }
+    .ad-card {
+      grid-column: span 2;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 0.75rem 0.75rem 1.5rem;
       display: flex;
       flex-direction: column;
+      gap: 1.25rem;
     }
-    .adaptive-list .feat-item {
-      padding: 1.9rem 0;
-      border-bottom: 1px solid var(--divider);
+    .ad-card.wide { grid-column: span 3; }
+    .ad-copy { padding: 0 0.75rem; }
+    .ad-copy h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text);
+      letter-spacing: -0.01em;
+      margin-bottom: 0.35rem;
     }
-    .adaptive-list .feat-item:first-child { padding-top: 0; }
-    .adaptive-list .feat-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .ad-copy p {
+      font-size: 0.86rem;
+      color: var(--text-sub);
+      line-height: 1.65;
+    }
+
+    /* Mini app vignettes (decorative; the copy carries the meaning) */
+    .ad-visual {
+      height: 176px;
+      background: var(--bg);
+      border: 1px solid var(--divider);
+      border-radius: 12px;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 0.5rem;
+      overflow: hidden;
+      font-size: 0.75rem;
+      color: var(--text);
+    }
+    .ad-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3em;
+      padding: 0.22rem 0.6rem;
+      border-radius: 999px;
+      background: var(--sage-bg);
+      color: var(--sage-text);
+      font-weight: 500;
+      font-size: 0.7rem;
+      white-space: nowrap;
+    }
+    .ad-chip.outline { background: transparent; border: 1px solid var(--border); color: var(--text-muted); }
+    .ad-chip.accent  { background: var(--accent-muted); color: var(--accent-text); }
+    .ad-chip.off     { background: transparent; border: 1px dashed var(--border); color: var(--text-muted); text-decoration: line-through; }
+
+    .ad-days { flex-direction: row; align-items: stretch; gap: 0.6rem; }
+    .ad-day {
+      flex: 1;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 0.7rem;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.35rem;
+    }
+    .ad-day-name { font-weight: 600; color: var(--accent-text); font-size: 0.85rem; margin-bottom: 0.15rem; }
+
+    .ad-row {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 0.48rem 0.75rem;
+      font-weight: 500;
+    }
+    .ad-row .ad-chip { margin-left: auto; }
+    .ad-row .was { color: var(--text-muted); text-decoration: line-through; font-weight: 400; }
+    .ad-row .icon { color: var(--accent); }
+    .ad-row.swapped { border-color: var(--accent-border); }
+
+    .ad-steps { flex-direction: row; align-items: flex-end; justify-content: center; gap: 0.6rem; }
+    .ad-step { flex: 1; max-width: 92px; display: flex; flex-direction: column; align-items: center; gap: 0.4rem; }
+    .ad-bar {
+      width: 100%;
+      border-radius: 8px 8px 4px 4px;
+      background: var(--surface-alt);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: center;
+      padding: 0.45rem 0.25rem;
+      line-height: 1.25;
+      font-weight: 600;
+      text-align: center;
+    }
+    .ad-bar small { font-weight: 400; color: var(--text-sub); font-size: 0.68rem; }
+    .ad-step:nth-child(1) .ad-bar { height: 62px; }
+    .ad-step:nth-child(2) .ad-bar { height: 86px; background: var(--accent-muted); }
+    .ad-step:nth-child(3) .ad-bar { height: 110px; background: var(--accent); color: var(--accent-fg); }
+    .ad-step:nth-child(3) .ad-bar small { color: var(--accent-fg); opacity: 0.85; }
+    .ad-step-label { font-size: 0.68rem; color: var(--text-muted); font-weight: 500; }
+
+    .ad-week-status { align-self: flex-start; }
+    .ad-week { display: flex; gap: 0.45rem; }
+    .ad-wd {
+      flex: 1;
+      border-radius: 10px;
+      padding: 0.55rem 0.3rem;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.25rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+    }
+    .ad-wd b { font-size: 0.65rem; color: var(--text-muted); font-weight: 500; text-transform: uppercase; letter-spacing: 0.06em; }
+    .ad-wd span { font-weight: 600; font-size: 0.72rem; }
+    .ad-wd .icon { font-size: 0.85rem; }
+    .ad-wd.done { background: var(--sage-bg); border-color: transparent; color: var(--sage-text); }
+    .ad-wd.done b { color: var(--sage-text); }
+    .ad-wd.next { border-color: var(--accent-border); border-style: dashed; color: var(--accent-text); }
+
+    .ad-fit { align-items: center; gap: 0.85rem; }
+    .ad-time {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 1.35rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--accent-text);
+      background: var(--surface);
+      border: 1px solid var(--accent-border);
+      border-radius: 999px;
+      padding: 0.35rem 1rem;
+    }
+    .ad-equip { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.35rem; }
 
     /* ── Cards ── */
     #cards {
@@ -746,9 +875,9 @@
       .features-layout { flex-direction: column-reverse; }
       .features-phone-col { width: 100%; }
       .features-phone-sticky { position: static; display: flex; justify-content: center; }
-      .adaptive-layout { flex-direction: column; }
-      .adaptive-intro { position: static; margin-bottom: 2.75rem; }
-      .adaptive-lede { max-width: 60ch; }
+      .adaptive-grid { grid-template-columns: repeat(2, 1fr); }
+      .ad-card, .ad-card.wide { grid-column: span 1; }
+      .ad-card:first-child { grid-column: span 2; }
       .cta-inner { flex-direction: column; }
       .cta-content { text-align: center; }
       .cta-btns { align-items: center; }
@@ -756,6 +885,9 @@
       .cta-phone-col { display: none; }
 }
     @media (max-width: 640px) {
+      .adaptive-grid { grid-template-columns: 1fr; }
+      .ad-card:first-child { grid-column: span 1; }
+      .ad-days .ad-day:nth-child(3) { display: none; }
       #hero { padding: 100px 5% 60px; }
       #features, #adaptive, #cards, #cta { padding-left: 5%; padding-right: 5%; }
       .phone-frame { width: 220px; }
@@ -943,55 +1075,78 @@
 
 <!-- ═══════════════════════════════════════ ADAPTIVE ═══ -->
 <section id="adaptive">
-  <div class="adaptive-layout">
+  <div class="reveal-up">
+    <p class="section-eyebrow">Adaptive planning</p>
+    <h2 class="section-title">Workouts that learn how you train</h2>
+    <p class="adaptive-lede">Rep builds each day’s workout from how you actually train, not from a generic template.</p>
+  </div>
 
-    <div class="adaptive-intro reveal-up">
-      <p class="section-eyebrow">Adaptive planning</p>
-      <h2 class="section-title">Workouts that learn how you train</h2>
-      <p class="adaptive-lede">Rep builds each day’s workout from how you actually train, not from a generic template.</p>
-    </div>
+  <div class="adaptive-grid">
 
-    <ul class="adaptive-list">
-    <li class="feat-item reveal-up">
-      <div class="feat-icon"><svg class="icon" data-icon="split" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 3h5v5" /><path d="M8 3H3v5" /><path d="M12 22v-8.3a4 4 0 0 0-1.172-2.872L3 3" /><path d="m15 9 6-6" /></svg></div>
-      <div class="feat-text">
+    <article class="ad-card wide reveal-up">
+      <div class="ad-visual ad-days" aria-hidden="true">
+        <div class="ad-day"><span class="ad-day-name">Push</span><span class="ad-chip">Chest</span><span class="ad-chip">Shoulders</span><span class="ad-chip">Triceps</span></div>
+        <div class="ad-day"><span class="ad-day-name">Pull</span><span class="ad-chip">Back</span><span class="ad-chip">Biceps</span></div>
+        <div class="ad-day"><span class="ad-day-name">Legs</span><span class="ad-chip outline">Squat</span><span class="ad-chip outline">Deadlift</span></div>
+      </div>
+      <div class="ad-copy">
         <h3>It learns your split</h3>
         <p>Train your upper days as a push day and a pull day? Rep notices and keeps them that way. Your chest day gets chest, shoulders and triceps. Your back day gets back and biceps. The same goes for leg days: deadlifts and squats stay together, and leg press gets its own day, if that’s how you do it.</p>
       </div>
-    </li>
+    </article>
 
-    <li class="feat-item reveal-up">
-      <div class="feat-icon"><svg class="icon" data-icon="shuffle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m18 14 4 4-4 4" /><path d="m18 2 4 4-4 4" /><path d="M2 18h1.973a4 4 0 0 0 3.3-1.7l5.454-8.6a4 4 0 0 1 3.3-1.7H22" /><path d="M2 6h1.972a4 4 0 0 1 3.6 2.2" /><path d="M22 18h-6.041a4 4 0 0 1-3.3-1.8l-.359-.45" /></svg></div>
-      <div class="feat-text">
+    <article class="ad-card wide reveal-up">
+      <div class="ad-visual" aria-hidden="true">
+        <div class="ad-row">Bench Press <span class="ad-chip"><svg class="icon" data-icon="lock" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="11" x="3" y="11" rx="2" ry="2" /><path d="M7 11V7a5 5 0 0 1 10 0v4" /></svg>Main lift</span></div>
+        <div class="ad-row">Overhead Press <span class="ad-chip"><svg class="icon" data-icon="lock" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="11" x="3" y="11" rx="2" ry="2" /><path d="M7 11V7a5 5 0 0 1 10 0v4" /></svg>Main lift</span></div>
+        <div class="ad-row swapped"><span class="was">Cable Fly</span><svg class="icon" data-icon="arrow-right" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>Pec Deck <span class="ad-chip accent"><svg class="icon" data-icon="refresh-cw" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8" /><path d="M21 3v5h-5" /><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16" /><path d="M8 16H3v5" /></svg>Rotated in</span></div>
+      </div>
+      <div class="ad-copy">
         <h3>Main lifts stay, accessories rotate</h3>
         <p>The big lifts you’re building stay on your plan so you can keep adding weight. Accessories rotate out after a few weeks in a row, and how often depends on your variety setting. Their replacements are exercises you already know, not something obscure.</p>
       </div>
-    </li>
+    </article>
 
-    <li class="feat-item reveal-up">
-      <div class="feat-icon"><svg class="icon" data-icon="chart-line" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v16a2 2 0 0 0 2 2h16" /><path d="m19 9-5 5-4-4-3 3" /></svg></div>
-      <div class="feat-text">
+    <article class="ad-card reveal-up">
+      <div class="ad-visual ad-steps" aria-hidden="true">
+        <div class="ad-step"><div class="ad-bar">135 lb<small>× 8</small></div><span class="ad-step-label">Last time</span></div>
+        <div class="ad-step"><div class="ad-bar">135 lb<small>× 10</small></div><span class="ad-step-label">+ reps</span></div>
+        <div class="ad-step"><div class="ad-bar">145 lb<small>× 8</small></div><span class="ad-step-label">+ weight</span></div>
+      </div>
+      <div class="ad-copy">
         <h3>It reads your progress</h3>
         <p>Rep tracks your weight and reps the same way it suggests your next set: more reps first, then more weight. When an accessory stops moving, it’s the first one rotated out.</p>
       </div>
-    </li>
+    </article>
 
-    <li class="feat-item reveal-up">
-      <div class="feat-icon"><svg class="icon" data-icon="calendar-clock" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 14v2.2l1.6 1" /><path d="M16 2v3" /><path d="M21 7.338V5a2 2 0 00-2-2H5a2 2 0 00-2 2v14a2 2 0 002 2h2.338" /><path d="M3 9h5.859" /><path d="M8 2v3" /><circle cx="16" cy="16" r="6" /></svg></div>
-      <div class="feat-text">
+    <article class="ad-card reveal-up">
+      <div class="ad-visual" aria-hidden="true">
+        <span class="ad-chip accent ad-week-status"><svg class="icon" data-icon="refresh-cw" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8" /><path d="M21 3v5h-5" /><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16" /><path d="M8 16H3v5" /></svg>Re-planned just now</span>
+        <div class="ad-week">
+          <div class="ad-wd done"><b>Mon</b><svg class="icon" data-icon="check" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg><span>Push</span></div>
+          <div class="ad-wd done"><b>Tue</b><svg class="icon" data-icon="check" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg><span>Pull</span></div>
+          <div class="ad-wd next"><b>Thu</b><svg class="icon" data-icon="sparkles" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z" /><path d="M20 2v4" /><path d="M22 4h-4" /><circle cx="4" cy="20" r="2" /></svg><span>Legs</span></div>
+          <div class="ad-wd next"><b>Sat</b><svg class="icon" data-icon="sparkles" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z" /><path d="M20 2v4" /><path d="M22 4h-4" /><circle cx="4" cy="20" r="2" /></svg><span>Push</span></div>
+        </div>
+      </div>
+      <div class="ad-copy">
         <h3>It adapts as your week happens</h3>
         <p>Finish a workout and the rest of your week re-plans straight away, around what you actually did.</p>
       </div>
-    </li>
+    </article>
 
-    <li class="feat-item reveal-up">
-      <div class="feat-icon"><svg class="icon" data-icon="dumbbell" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17.596 12.768a2 2 0 1 0 2.829-2.829l-1.768-1.767a2 2 0 0 0 2.828-2.829l-2.828-2.828a2 2 0 0 0-2.829 2.828l-1.767-1.768a2 2 0 1 0-2.829 2.829z" /><path d="m2.5 21.5 1.4-1.4" /><path d="m20.1 3.9 1.4-1.4" /><path d="M5.343 21.485a2 2 0 1 0 2.829-2.828l1.767 1.768a2 2 0 1 0 2.829-2.829l-6.364-6.364a2 2 0 1 0-2.829 2.829l1.768 1.767a2 2 0 0 0-2.828 2.829z" /><path d="m9.6 14.4 4.8-4.8" /></svg></div>
-      <div class="feat-text">
+    <article class="ad-card reveal-up">
+      <div class="ad-visual ad-fit" aria-hidden="true">
+        <span class="ad-time"><svg class="icon" data-icon="clock" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg>45 min</span>
+        <div class="ad-equip">
+          <span class="ad-chip">Dumbbells</span><span class="ad-chip">Bench</span><span class="ad-chip">Cables</span><span class="ad-chip off">Barbell</span>
+        </div>
+      </div>
+      <div class="ad-copy">
         <h3>It fits your gym and your time</h3>
         <p>Workouts only use the equipment in your space and fit the time you’ve set. They skip stretches and drills that don’t belong in a strength session.</p>
       </div>
-    </li>
-    </ul>
+    </article>
 
   </div>
 </section>
