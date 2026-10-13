@@ -575,7 +575,8 @@
       align-items: flex-start;
       gap: 0.35rem;
     }
-    .ad-day-name { font-weight: 600; color: var(--accent-text); font-size: 0.85rem; margin-bottom: 0.15rem; }
+    .ad-day-name { font-weight: 600; color: var(--accent-text); font-size: 0.85rem; margin-bottom: 0.15rem; white-space: nowrap; }
+    .ad-day-name small { font-weight: 500; color: var(--text-muted); font-size: 0.7rem; }
 
     .ad-row {
       display: flex;
@@ -1085,9 +1086,9 @@
 
     <article class="ad-card wide reveal-up">
       <div class="ad-visual ad-days" aria-hidden="true">
-        <div class="ad-day"><span class="ad-day-name">Push</span><span class="ad-chip">Chest</span><span class="ad-chip">Shoulders</span><span class="ad-chip">Triceps</span></div>
-        <div class="ad-day"><span class="ad-day-name">Pull</span><span class="ad-chip">Back</span><span class="ad-chip">Biceps</span></div>
-        <div class="ad-day"><span class="ad-day-name">Legs</span><span class="ad-chip outline">Squat</span><span class="ad-chip outline">Deadlift</span></div>
+        <div class="ad-day"><span class="ad-day-name">Upper A <small>Push</small></span><span class="ad-chip">Chest</span><span class="ad-chip">Shoulders</span><span class="ad-chip">Triceps</span></div>
+        <div class="ad-day"><span class="ad-day-name">Upper B <small>Pull</small></span><span class="ad-chip">Back</span><span class="ad-chip">Biceps</span></div>
+        <div class="ad-day"><span class="ad-day-name">Lower A <small>Hinge</small></span><span class="ad-chip outline">Squat</span><span class="ad-chip outline">Deadlift</span></div>
       </div>
       <div class="ad-copy">
         <h3>It learns your split</h3>
@@ -1103,19 +1104,19 @@
       </div>
       <div class="ad-copy">
         <h3>Main lifts stay, accessories rotate</h3>
-        <p>The big lifts you’re building stay on your plan so you can keep adding weight. Accessories rotate out after a few weeks in a row, and how often depends on your variety setting. Their replacements are exercises you already know, not something obscure.</p>
+        <p>The big lifts you’re building stay on your plan so you can keep adding weight. Accessories rotate out after a few weeks in a row, then sit out for two weeks. How soon depends on your Workout Preferences setting. Replacements favour exercises you already know over obscure ones.</p>
       </div>
     </article>
 
     <article class="ad-card reveal-up">
       <div class="ad-visual ad-steps" aria-hidden="true">
-        <div class="ad-step"><div class="ad-bar">135 lb<small>× 8</small></div><span class="ad-step-label">Last time</span></div>
-        <div class="ad-step"><div class="ad-bar">135 lb<small>× 10</small></div><span class="ad-step-label">+ reps</span></div>
-        <div class="ad-step"><div class="ad-bar">145 lb<small>× 8</small></div><span class="ad-step-label">+ weight</span></div>
+        <div class="ad-step"><div class="ad-bar">135 lbs<small>× 8</small></div><span class="ad-step-label">Last time</span></div>
+        <div class="ad-step"><div class="ad-bar">135 lbs<small>× 12</small></div><span class="ad-step-label">+ reps</span></div>
+        <div class="ad-step"><div class="ad-bar">140 lbs<small>× 8</small></div><span class="ad-step-label">+ weight</span></div>
       </div>
       <div class="ad-copy">
         <h3>It reads your progress</h3>
-        <p>Rep tracks your weight and reps the same way it suggests your next set: more reps first, then more weight. When an accessory stops moving, it’s the first one rotated out.</p>
+        <p>Rep tracks your weight and reps the same way it suggests your next set: more reps first, then more weight. When it’s time to rotate, stalled accessories go first.</p>
       </div>
     </article>
 
@@ -1123,15 +1124,15 @@
       <div class="ad-visual" aria-hidden="true">
         <span class="ad-chip accent ad-week-status"><svg class="icon" data-icon="refresh-cw" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8" /><path d="M21 3v5h-5" /><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16" /><path d="M8 16H3v5" /></svg>Re-planned just now</span>
         <div class="ad-week">
-          <div class="ad-wd done"><b>Mon</b><svg class="icon" data-icon="check" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg><span>Push</span></div>
-          <div class="ad-wd done"><b>Tue</b><svg class="icon" data-icon="check" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg><span>Pull</span></div>
-          <div class="ad-wd next"><b>Thu</b><svg class="icon" data-icon="sparkles" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z" /><path d="M20 2v4" /><path d="M22 4h-4" /><circle cx="4" cy="20" r="2" /></svg><span>Legs</span></div>
-          <div class="ad-wd next"><b>Sat</b><svg class="icon" data-icon="sparkles" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z" /><path d="M20 2v4" /><path d="M22 4h-4" /><circle cx="4" cy="20" r="2" /></svg><span>Push</span></div>
+          <div class="ad-wd done"><b>Mon</b><svg class="icon" data-icon="check" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg><span>Upper A</span></div>
+          <div class="ad-wd done"><b>Tue</b><svg class="icon" data-icon="check" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg><span>Lower A</span></div>
+          <div class="ad-wd next"><b>Thu</b><svg class="icon" data-icon="sparkles" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z" /><path d="M20 2v4" /><path d="M22 4h-4" /><circle cx="4" cy="20" r="2" /></svg><span>Upper B</span></div>
+          <div class="ad-wd next"><b>Sat</b><svg class="icon" data-icon="sparkles" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z" /><path d="M20 2v4" /><path d="M22 4h-4" /><circle cx="4" cy="20" r="2" /></svg><span>Lower B</span></div>
         </div>
       </div>
       <div class="ad-copy">
         <h3>It adapts as your week happens</h3>
-        <p>Finish a workout and the rest of your week re-plans straight away, around what you actually did.</p>
+        <p>Finish a workout and the rest of your week re-plans straight away, around what you actually did. Days you’ve edited stay as you left them.</p>
       </div>
     </article>
 
@@ -1139,12 +1140,12 @@
       <div class="ad-visual ad-fit" aria-hidden="true">
         <span class="ad-time"><svg class="icon" data-icon="clock" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg>45 min</span>
         <div class="ad-equip">
-          <span class="ad-chip">Dumbbells</span><span class="ad-chip">Bench</span><span class="ad-chip">Cables</span><span class="ad-chip off">Barbell</span>
+          <span class="ad-chip">Dumbbells</span><span class="ad-chip">Bench</span><span class="ad-chip">Cable Machine</span><span class="ad-chip off">Barbell</span>
         </div>
       </div>
       <div class="ad-copy">
         <h3>It fits your gym and your time</h3>
-        <p>Workouts only use the equipment in your space and fit the time you’ve set. They skip stretches and drills that don’t belong in a strength session.</p>
+        <p>Workouts only use the equipment in your space and fit the time you’ve set. They skip stretches and drills that don’t belong in a strength session, unless you log them yourself.</p>
       </div>
     </article>
 
